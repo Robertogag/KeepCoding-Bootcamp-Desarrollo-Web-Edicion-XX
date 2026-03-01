@@ -1,45 +1,87 @@
-## Introducción a JavaScript
+# 🚀 Module 01 — JavaScript Foundations
 
-Este módulo proporciona una visión integral de los fundamentos de JavaScript. Durante este curso, exploraremos los siguientes conceptos:
+This module marks the beginning of my journey into modern web development.
 
-### Contenidos
-
-- Introducción teórica
-- Creando nuestro primer JS
-- Grammar & Variables
-- Tipos de datos
-- Operadores
-- Sentencias de control y bloques
-- Arrays & Strings
-- Bucles
-- Objects
-- Funciones
-- Async (Asincronía)
-- Destructuring y spread operator
-- Otros temas de interés
-
-## Formato del Curso
-
-- Presentación teórica del tema.
-- Sesiones de *live coding* con ejemplos prácticos, los cuales serán almacenados en la carpeta `clases`.
-- Propuesta de ejercicios para realizar durante la clase.
-- Compartir código en Discord.
-
-> **IMPORTANTE**
-> A programar se aprende programando, por lo que se recomienda intentar los ejercicios durante la clase o en diferido si es tu caso.
-
-## Práctica
-
-En la carpeta `practica_final` encontrarás la práctica, que consiste en:
-- Unos primeros ejercicios cortos.
-- Dos ejercicios a elegir (podrás hacer uno de ellos)
-- Un reto final un poco más grande y complejo.
-
-## Requisitos
-
-- Live Server
-- Visual Studio Code (VSCode)
+Here I built the technical foundation that everything else depends on: logic, data handling, execution flow, and asynchronous thinking.
 
 ---
 
-¡Espero que disfrutes del módulo y aproveches al máximo las oportunidades de práctica para fortalecer tus habilidades en JavaScript! 🚀
+## 🧠 What I Learned
+
+### Core JavaScript
+
+- Variables (`let`, `const`) and scope
+- Primitive data types
+- Type coercion and `typeof`
+- Operators (arithmetic, comparison, logical)
+- Truthy & falsy behavior
+- Control structures (`if`, `else`, `switch`, ternary)
+
+### Working with Data
+
+- Arrays (creation, manipulation, search)
+- Objects and nested data structures
+- Mutability vs immutability
+- Spread operator
+- Destructuring
+- Object utilities (`Object.keys`, `values`, `entries`)
+
+### Functions
+
+- Function declaration vs arrow functions
+- Parameters and return values
+- Early return pattern
+- Closures
+- Functions as values
+- Rest parameters
+- Default parameters
+
+### Functional Programming
+
+- `map`
+- `filter`
+- `reduce`
+- `find`
+- `some`
+- `every`
+- Method chaining pipelines
+
+### Asynchronous JavaScript
+
+- `setTimeout`
+- Callback pattern
+- Promises
+- Promise chaining
+- `Promise.all`
+- `async/await`
+- Error handling with `try/catch`
+
+### Additional Topics
+
+- Date manipulation
+- Regular Expressions (Regex)
+- JSON (`parse`, `stringify`)
+- Optional chaining
+- ES Modules (`import/export`)
+
+---
+
+## 🛠 What I Practiced
+
+Inside `practica_final/`, I completed:
+
+- Object modeling exercises
+- Bug detection and refactoring
+- Array transformation challenges
+- Async bug fixing using Promises and `async/await`
+- Logical condition handling
+- Clean output formatting
+- Avoiding mutation of original data
+- Structuring small, modular JS files
+
+Every exercise was executed and verified using Node.js.
+
+---
+
+## 🧪 Final Practice Structure
+
