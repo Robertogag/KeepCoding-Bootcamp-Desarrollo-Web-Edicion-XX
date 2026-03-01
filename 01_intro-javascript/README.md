@@ -74,14 +74,5 @@ Inside `practica_final/`, I completed:
 - Bug detection and refactoring
 - Array transformation challenges
 - Async bug fixing using Promises and `async/await`
-- Logical condition handling
-- Clean output formatting
-- Avoiding mutation of original data
-- Structuring small, modular JS files
 
-Every exercise was executed and verified using Node.js.
-
----
-
-## 🧪 Final Practice Structure
 
