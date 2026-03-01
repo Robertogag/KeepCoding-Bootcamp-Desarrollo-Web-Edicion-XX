@@ -42,7 +42,7 @@ data.forEach((developer) => {
 });
 ```
 
-### Exercise 3: Transformations:
+### Transformations output:
 
 ![Transformations Output](./transformations_output.png)
 
