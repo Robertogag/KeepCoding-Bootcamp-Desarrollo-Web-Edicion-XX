@@ -83,8 +83,3 @@ The objective is to build production-ready developers capable of designing, buil
 ## Phase 6 – Final Projects
 27. Final Full-Stack Projects  
 
----
-
-# 🧩 Repository Structure
-
-Each module will be organized as:
