@@ -49,7 +49,6 @@ Here I built the technical foundation that everything else depends on: logic, da
 - `find`
 - `some`
 - `every`
-- Method chaining pipelines
 
 ### Asynchronous JavaScript
 
