@@ -1,9 +1,8 @@
+# 🚀 Module 01 — JavaScript Foundations
+
 <p align="center">
   <img src="../00_images/markdown-assets/JavaScript.jpg" width="800"/>
 </p>
-
-
-# 🚀 Module 01 — JavaScript Foundations
 
 This module marks the beginning of my journey into modern web development.
 
