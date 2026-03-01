@@ -1,5 +1,9 @@
 # 🚀 Module 01 — JavaScript Foundations
 
+<p align="center">
+  <img src="../00_images/markdown-assets/JavaScript.jpg" width="800"/>
+</p>
+
 This module marks the beginning of my journey into modern web development.
 
 Here I built the technical foundation that everything else depends on: logic, data handling, execution flow, and asynchronous thinking.
@@ -74,5 +78,4 @@ Inside `practica_final/`, I completed:
 - Bug detection and refactoring
 - Array transformation challenges
 - Async bug fixing using Promises and `async/await`
-
 
