@@ -33,7 +33,7 @@ Instead of returning the value directly, the function calls:
 
 ### Fix Async Bug output:
 
-![fix_async_bug_output.png](./images/fix_async_bug_output.png)
+![fix_async_bug_output.png](./fix_async_bug_output.png)
 
 ## Verification
 
