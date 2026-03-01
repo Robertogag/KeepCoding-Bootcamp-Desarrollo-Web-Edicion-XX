@@ -57,7 +57,7 @@ This keeps the original array unchanged.
 ### 4) Bonus using `.map()`  
 I also implemented `duplicateNumbersWithMap(numbers)` using the `.map()` method, which returns a new array automatically and makes the solution cleaner.
 
-### Vowel counter test output:
+### Vowel counter output:
 
 ![Duplicate Numbers Output](./duplicate_numbers_output.png)
 
