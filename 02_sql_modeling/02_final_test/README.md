@@ -107,11 +107,9 @@ This is the main script of the practice.
 
 If you prefer to run the project in separate steps:
 
-1. Run `02_SQL_scripts/00_create_database.sql` while connected to the default PostgreSQL database, usually `postgres`
-2. Reconnect to the database `keepcoding_web_xx`
-3. Run `02_SQL_scripts/01_create_tables.sql`
-4. Run `02_SQL_scripts/02_insert_data_from_excel.sql`
-5. Run `02_SQL_scripts/03_test_queries.sql`
+1. Run `02_SQL_scripts/01_create_tables.sql`
+2. Run `02_SQL_scripts/02_insert_data.sql`
+3. Run `02_SQL_scripts/03_test_queries.sql`
 
 ---
 
