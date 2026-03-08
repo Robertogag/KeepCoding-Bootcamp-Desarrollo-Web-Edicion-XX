@@ -24,6 +24,5 @@ The objective of this module was to learn how to move from a business problem to
 ## Contents
 
 - `00_images/`: images used in the documentation
-- `01_ERD/`: entity-relationship diagrams
-- `02_SQL_scripts/`: SQL exercises and scripts
-- `02_final_test/`: final practice with ERD, SQL scripts, source data and execution guide for full details and execution steps.
+- `01_sql_and_modeling/`: exercises and diagrams from the module
+- `02_final_test/`: final practice with ERD, SQL scripts, source data and execution guide
