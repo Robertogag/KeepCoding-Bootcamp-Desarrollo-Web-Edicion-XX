@@ -77,4 +77,3 @@ Inside `practica_final/`, I completed:
 - Bug detection and refactoring
 - Array transformation challenges
 - Async bug fixing using Promises and `async/await`
-
