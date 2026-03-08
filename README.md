@@ -1,6 +1,3 @@
-cd "/a/13_Cursos/KeepCoding-Bootcamp-Desarrollo-Web-Edicion-XX"
-
-cat > README.md <<'EOF'
 # KeepCoding – Web Development Bootcamp
 
 <p align="center">
@@ -119,4 +116,3 @@ Each folder represents a module, practice or project developed during the progra
 This repository will continue growing as new modules and deliverables are completed.
 
 The intention is not only to store final results, but to reflect the progression from technical foundations to full-stack development, supported by prior experience in industrial systems, real-time data acquisition and production KPI platforms.
-EOF
