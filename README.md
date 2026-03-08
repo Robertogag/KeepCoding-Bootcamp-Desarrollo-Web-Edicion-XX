@@ -31,10 +31,6 @@ This bootcamp represents the next step in my professional development, expanding
 
 I come from an economics background and transitioned into technology with a strong focus on systems, data and software development.
 
-<p align="center">
-  <strong>Industrial Data Engineer | MES & OEE Systems | SQL • Node • React • Python • EUROMAP/Modbus/OPC-UA</strong>
-</p>
-
 Over the last year and a half, I have been working on the design and implementation of MES and OEE systems focused on:
 
 - real-time acquisition of critical production data
