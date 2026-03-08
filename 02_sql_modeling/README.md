@@ -1,32 +1,29 @@
 # SQL Modeling
 
-![Project image](00_images/sql.jpg)
+![Module image](00_images/sql.jpg)
 
-## Overview
+## Module summary
 
-This folder contains the SQL modeling practice and the final test deliverables for the KeepCoding Web Development Bootcamp.
+This module covers the foundations of relational database design and SQL.
 
-The work includes:
-- data modeling
-- entity relationship design
-- normalized relational schema
-- SQL scripts for PostgreSQL
-- source data used for the final test
+The main topics worked during the module were:
 
-## Structure
+- entity-relationship modeling
+- entities, attributes, relationships and cardinality
+- primary keys and foreign keys
+- normalization
+- first, second and third normal form
+- SQL basics in PostgreSQL
+- DDL: schemas, table creation, table modification and table deletion
+- DML: inserts, selects, updates, deletes and joins
 
-- `00_images/`: supporting images
-- `01_ERD/`: entity relationship diagrams
-- `02_SQL_scripts/`: SQL scripts for the practice
-- `02_final_test/`: final deliverable with complete documentation, ERD, scripts, and source data
+## Goal of the module
 
-## Final test
+The objective of this module was to learn how to move from a business problem to a normalized relational model and then implement that model in SQL.
 
-The final test includes:
-- normalized database design
-- scripts to create the database and schema
-- table creation scripts
-- inserts generated from the source Excel file
-- validation queries based on the functional requirements
+## Contents
 
-See `02_final_test/README.md` for full details and execution steps.
+- `00_images/`: images used in the documentation
+- `01_ERD/`: entity-relationship diagrams
+- `02_SQL_scripts/`: SQL exercises and scripts
+- `02_final_test/`: final practice with ERD, SQL scripts, source data and execution guide for full details and execution steps.
