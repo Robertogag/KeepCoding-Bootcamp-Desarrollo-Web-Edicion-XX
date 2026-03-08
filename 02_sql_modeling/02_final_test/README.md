@@ -85,7 +85,6 @@ The Excel file was reviewed and transformed into a normalized relational structu
 
 | Script | Purpose |
 |--------|---------|
-| `00_create_database.sql` | Creates the database |
 | `01_create_tables.sql` | Creates schema and tables |
 | `02_insert_data_from_excel.sql` | Loads transformed data from Excel |
 | `03_test_queries.sql` | Runs validation queries |
