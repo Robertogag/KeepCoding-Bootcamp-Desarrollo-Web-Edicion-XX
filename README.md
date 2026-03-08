@@ -1,12 +1,21 @@
+cd "/a/13_Cursos/KeepCoding-Bootcamp-Desarrollo-Web-Edicion-XX"
+
+cat > README.md <<'EOF'
 # KeepCoding – Web Development Bootcamp
 
 <p align="center">
   <img src="./00_images/markdown-assets/Web_Dev.webp" width="900" alt="Web Development Bootcamp"/>
 </p>
 
-This repository documents my progress throughout the KeepCoding Web Development Bootcamp and serves as a structured record of the work completed in each module.
+This repository documents my progress throughout the KeepCoding Web Development Bootcamp and serves as a structured record of the modules, exercises and deliverables completed during the program.
 
-It reflects the development of my skills across software engineering, from programming foundations to full-stack application design and implementation.
+This is my second bootcamp. Previously, I completed specialized training in:
+
+- Big Data
+- Artificial Intelligence
+- Machine Learning
+
+This stage represents the expansion of that background into full-stack software development and modern engineering practices.
 
 ---
 
@@ -14,23 +23,27 @@ It reflects the development of my skills across software engineering, from progr
 
 I come from an economics background and transitioned into technology with a strong focus on systems, data and software development.
 
-Over the last 1.6 years, I have been working on real-world system development projects, mainly in backend processes, data modeling and digital solutions for the automotive industry, including OEE-related systems and production environments.
+**Industrial Data Engineer | MES & OEE Systems | SQL • Node • React • Python • EUROMAP/Modbus/OPC-UA**
 
-Before this bootcamp, I had already completed technical training in:
+Over the last year and a half, I have been working on the design and implementation of MES and OEE systems focused on:
 
-- Big Data
-- Artificial Intelligence
-- Machine Learning
+- real-time acquisition of critical production data
+- industrial process monitoring
+- KPI calculation and control
+- backend logic and database design
+- operational dashboards and system integration
 
-This program represents the next step in my professional growth, strengthening my profile in full-stack development and modern software engineering practices.
+My work has been closely related to manufacturing environments, where software, industrial connectivity and data engineering must come together to support real operational decisions.
+
+This bootcamp strengthens that profile by adding a stronger foundation in web development, frontend architecture, backend systems and full-stack application design.
 
 ---
 
 ## About the Bootcamp
 
-The KeepCoding Web Development Bootcamp is an intensive program focused on building complete web development skills from the ground up.
+The KeepCoding Web Development Bootcamp is an intensive program designed to build complete web development skills from fundamentals to production-ready applications.
 
-The training combines theory and practice across key areas such as:
+The training combines theory and practice across areas such as:
 
 - programming fundamentals
 - frontend development
@@ -40,20 +53,21 @@ The training combines theory and practice across key areas such as:
 - testing and software quality
 - real-world project implementation
 
-The overall goal is to develop the ability to design, build and deploy complete applications using professional workflows and production-oriented practices.
+The goal is to develop the ability to design, build and deploy complete applications using solid engineering practices.
 
 ---
 
 ## Repository Purpose
 
-This repository is organized as a learning and delivery workspace for the bootcamp.
+This repository is organized as a workspace for the bootcamp modules and deliveries.
 
-Each folder represents a module, exercise set or final delivery completed during the program. The idea is to keep a clear and structured record of:
+Each folder represents a module, practice or project developed during the program. The purpose is to keep a clear record of:
 
-- concepts studied
+- topics studied
 - practical exercises
-- module deliverables
-- final projects and technical documentation
+- module deliveries
+- technical documentation
+- final projects
 
 ---
 
@@ -102,6 +116,7 @@ Each folder represents a module, exercise set or final delivery completed during
 
 ## Current Focus
 
-This repository will continue to grow as new modules, exercises and deliverables are completed during the bootcamp.
+This repository will continue growing as new modules and deliverables are completed.
 
-Each section is intended to show not only the final result, but also the technical progression behind the learning process.
+The intention is not only to store final results, but to reflect the progression from technical foundations to full-stack development, supported by prior experience in industrial systems, real-time data acquisition and production KPI platforms.
+EOF
