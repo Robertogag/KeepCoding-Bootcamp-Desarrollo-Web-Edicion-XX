@@ -7,7 +7,6 @@
 <p align="center">
   <img src="https://img.shields.io/badge/PostgreSQL-Implemented-blue?logo=postgresql&logoColor=white" alt="PostgreSQL">
   <img src="https://img.shields.io/badge/Schema-videoclub-informational" alt="Schema">
-  <img src="https://img.shields.io/badge/Database-keepcoding__web__xx-success" alt="Database">
   <img src="https://img.shields.io/badge/Status-Ready%20to%20Run-brightgreen" alt="Status">
 </p>
 
