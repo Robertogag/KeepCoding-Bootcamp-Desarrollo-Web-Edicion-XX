@@ -27,12 +27,10 @@ This confirmed that both uppercase and lowercase vowels are now counted correctl
 
 ### Note about accented vowels
 
-For this implementation, the function only counts basic vowels (`a, e, i, o, u`).  
-Accented vowels such as `á, é, í, ó, ú` and characters like `ü` are not included.
+This implementation counts vowels in a Spanish-friendly way.  
+The input is normalized so accented vowels (`á, é, í, ó, ú`) and characters like `ü` are treated as their base vowels (`a, e, i, o, u`) before counting.
 
-Since the original requirement was only to fix the uppercase issue, I kept the solution simple.  
-
-### Vowel counter test output:
+### Vowel counter test output
 
 ![Vowel Test Output](./vowel_test_output.png)
 
