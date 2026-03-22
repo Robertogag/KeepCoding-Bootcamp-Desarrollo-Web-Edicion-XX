@@ -1,8 +1,7 @@
 # Final HTML and SCSS Project
 
 <p align="center">
-  <img src="00_images/screenshots/home-overview.png" alt="Streaming landing page overview" width="48%">
-  <img src="00_images/screenshots/spotlight-view.png" alt="Spotlight section and catalog detail" width="48%">
+  <img src="00_images/screenshots/home-overview.png" alt="Streaming landing page overview" width="90%">
 </p>
 
 <p align="center">
@@ -45,6 +44,16 @@ Build a landing page inspired by a streaming platform interface, including:
 - SCSS files organized into base, layout, components and sections
 - Local poster assets stored in an ordered image structure
 - English UI copy across the full page
+
+---
+
+## Spotlight Preview
+
+<p align="center">
+  <img src="00_images/screenshots/spotlight-view.png" alt="Spotlight section with synopsis and trailer" width="88%">
+</p>
+
+This screenshot shows the interactive spotlight area where the selected title updates the trailer, synopsis and additional information.
 
 ---
 
