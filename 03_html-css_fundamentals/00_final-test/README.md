@@ -83,12 +83,18 @@ This screenshot shows the interactive spotlight area where the selected title up
 
 ---
 
-## How to Run
+## Quick Start
 
-1. Open this folder in VS Code.
-2. Start Live Server with `Go Live`, or open `index.html` in a browser.
-3. The page works directly with `styles/main.css`.
-4. If you want to edit the SCSS source, update `styles/main.scss` and its partials, then compile it again to `styles/main.css`.
+1. Clone or download this repository.
+2. Open `03_html-css_fundamentals/00_final-test` in VS Code.
+3. Open `index.html`.
+4. Click `Go Live` with the Live Server extension.
+
+No installation or build step is required to view the project.
+
+The page already works with `styles/main.css`.
+
+If you want to edit the SCSS source, update `styles/main.scss` and its partials, then compile it again to `styles/main.css`.
 
 ---
 
