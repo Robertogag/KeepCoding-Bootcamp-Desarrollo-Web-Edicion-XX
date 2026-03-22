@@ -94,8 +94,6 @@ No installation or build step is required to view the project.
 
 The page already works with `styles/main.css`.
 
-If you want to edit the SCSS source, update `styles/main.scss` and its partials, then compile it again to `styles/main.css`.
-
 ---
 
 ## Notes
