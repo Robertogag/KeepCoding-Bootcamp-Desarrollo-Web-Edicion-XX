@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 750" role="img" aria-labelledby="title desc">
+  <title id="title">Night Run</title>
+  <desc id="desc">Poster placeholder for Night Run.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2a1610" />
+      <stop offset="100%" stop-color="#6a1f17" />
+    </linearGradient>
+  </defs>
+  <rect width="600" height="750" fill="url(#bg)" />
+  <path d="M120 440 L230 260 L340 440 Z" fill="#ffffff" opacity="0.12" />
+  <path d="M270 440 L380 220 L490 440 Z" fill="#ffffff" opacity="0.08" />
+  <rect x="50" y="520" width="500" height="160" rx="24" fill="#0f1117" opacity="0.42" />
+  <text x="50" y="605" fill="#ffffff" font-family="Arial, sans-serif" font-size="58" font-weight="700">NIGHT RUN</text>
+  <text x="50" y="650" fill="#bac1d0" font-family="Arial, sans-serif" font-size="24">Urban action</text>
+</svg>

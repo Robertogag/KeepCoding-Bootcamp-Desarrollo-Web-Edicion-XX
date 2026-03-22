@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">Featured banner</title>
+  <desc id="desc">Illustrated featured banner for the highlighted content block.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1c2333" />
+      <stop offset="60%" stop-color="#10141d" />
+      <stop offset="100%" stop-color="#2b1018" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)" />
+  <rect x="90" y="90" width="1020" height="620" rx="30" fill="#171b26" />
+  <circle cx="910" cy="240" r="140" fill="#e50914" opacity="0.16" />
+  <rect x="145" y="160" width="360" height="420" rx="26" fill="#222836" />
+  <rect x="555" y="175" width="400" height="36" rx="18" fill="#ffffff" opacity="0.14" />
+  <rect x="555" y="250" width="500" height="24" rx="12" fill="#ffffff" opacity="0.1" />
+  <rect x="555" y="300" width="430" height="24" rx="12" fill="#ffffff" opacity="0.1" />
+  <rect x="555" y="350" width="360" height="24" rx="12" fill="#ffffff" opacity="0.1" />
+  <rect x="555" y="435" width="210" height="64" rx="18" fill="#e50914" />
+  <rect x="790" y="435" width="210" height="64" rx="18" fill="#0f1117" stroke="#ffffff" stroke-opacity="0.12" />
+  <text x="145" y="665" fill="#ffffff" font-family="Arial, sans-serif" font-size="70" font-weight="700">FILE 27</text>
+  <text x="145" y="715" fill="#bac1d0" font-family="Arial, sans-serif" font-size="28">Weekly featured story</text>
+</svg>

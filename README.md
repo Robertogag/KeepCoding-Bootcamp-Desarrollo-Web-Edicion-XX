@@ -105,6 +105,7 @@ The goal is not only to store final results, but also to reflect a clear technic
 | `00_images/` | Visual assets used across the repository |
 | `01_intro-javascript/` | Introduction to JavaScript module |
 | `02_sql_modeling/` | SQL modeling module, exercises and final practice |
+| `03_html-css_fundamentals/` | HTML5, CSS and SCSS fundamentals module with final landing page project |
 
 ---
 

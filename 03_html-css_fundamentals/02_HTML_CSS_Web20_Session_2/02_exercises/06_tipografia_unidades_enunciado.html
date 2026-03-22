@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Ejercicio Tipografía CSS</title>
+<style>
+/* COMPLETA LAS UNIDADES CORRECTAS */
+
+.hero{
+    height: ___;        /* Debe ocupar toda la pantalla (viewport height) */
+    background:#1e293b;
+    color:white;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+
+.title{
+    font-size: ___;     /* Debe usar una unidad basada en el tamaño raíz */
+}
+
+.subtitle{
+    font-size: ___;     /* Debe escalar respecto al título */
+}
+
+.container{
+    width: ___;         /* Debe ocupar un porcentaje del ancho */
+    margin:auto;
+}
+
+.text{
+    font-size: ___;     /* Debe usar px */
+    max-width: ___;     /* Limitar ancho usando caracteres */
+}
+</style>
+</head>
+
+<body>
+
+<header class="hero">
+<h1 class="title">Aprendiendo CSS</h1>
+<h2 class="subtitle">Unidades tipográficas modernas</h2>
+</header>
+
+<main class="container">
+<p class="text">
+CSS permite controlar completamente la apariencia de una página web.
+Las unidades de medida son fundamentales para construir interfaces adaptables
+y mantener una buena legibilidad del contenido.
+</p>
+</main>
+
+</body>
+</html>

@@ -1,0 +1,23 @@
+body {
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  line-height: 1.5;
+  background:
+    radial-gradient(circle at top right, rgba(229, 9, 20, 0.16), transparent 28%),
+    $color-background;
+  color: $color-text;
+}
+
+main {
+  display: block;
+}
+
+.container {
+  width: min(100% - 2rem, $container-width);
+  margin-inline: auto;
+}
+
+.section-title {
+  font-size: clamp(1.4rem, 2vw, 1.75rem);
+  line-height: 1.2;
+}

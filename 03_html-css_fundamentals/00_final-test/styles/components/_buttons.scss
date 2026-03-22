@@ -1,0 +1,38 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  padding: 0.75rem 1.25rem;
+  border: 1px solid transparent;
+  border-radius: $radius-sm;
+  background: $color-accent;
+  color: $color-text;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.button:hover,
+.button:focus {
+  transform: translateY(-2px);
+  background: $color-accent-dark;
+}
+
+.button--ghost {
+  border-color: $color-border;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.button--ghost:hover,
+.button--ghost:focus {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.button:focus-visible {
+  outline: 2px solid $color-text;
+  outline-offset: 2px;
+}

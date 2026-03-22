@@ -1,0 +1,117 @@
+.featured {
+  padding: 0 0 $space-xl;
+  scroll-margin-top: $space-md;
+}
+
+.featured__box {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.85fr);
+  align-items: center;
+  gap: $space-lg;
+  padding: $space-lg;
+  border: 1px solid $color-border;
+  border-radius: $radius-lg;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02));
+  box-shadow: $shadow-soft;
+}
+
+.featured__media {
+  width: 100%;
+}
+
+.featured__player {
+  overflow: hidden;
+  border: 1px solid $color-border;
+  border-radius: $radius-lg;
+  background: #05070c;
+  box-shadow: $shadow-strong;
+}
+
+.featured__player iframe {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 0;
+}
+
+.featured__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: $radius-md;
+}
+
+.featured__content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.featured__eyebrow {
+  color: $color-accent;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.featured__text {
+  color: $color-text;
+  font-size: 1.08rem;
+  line-height: 1.8;
+}
+
+.featured__copy {
+  display: flex;
+  flex-direction: column;
+  gap: $space-md;
+  padding: $space-md;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.featured__meta {
+  color: $color-muted;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.03em;
+}
+
+.featured__info-list {
+  display: grid;
+  gap: $space-sm;
+}
+
+.featured__info-item {
+  color: $color-muted;
+  line-height: 1.7;
+  font-size: 0.98rem;
+}
+
+.featured__info-item--fact {
+  padding-left: $space-sm;
+  border-left: 3px solid rgba(229, 9, 20, 0.45);
+}
+
+.featured__helper {
+  color: $color-muted;
+  font-size: 0.92rem;
+}
+
+.featured__details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-xs $space-md;
+}
+
+.featured__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-sm;
+}
+
+@media (max-width: 860px) {
+  .featured__box {
+    grid-template-columns: 1fr;
+  }
+}

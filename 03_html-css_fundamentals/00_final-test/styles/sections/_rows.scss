@@ -1,0 +1,33 @@
+.content-rows {
+  padding: 1rem 0 $space-xl;
+}
+
+.content-row + .content-row {
+  margin-top: $space-xl;
+}
+
+.content-row__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $space-sm;
+  margin-bottom: $space-md;
+}
+
+.content-row__link {
+  color: $color-muted;
+  font-size: 0.95rem;
+  transition: color 0.2s ease;
+}
+
+.content-row__link:hover,
+.content-row__link:focus-visible {
+  color: $color-text;
+}
+
+@media (max-width: 560px) {
+  .content-row__header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Streaming landing page built with HTML5, CSS, and SCSS.">
+  <title>StreamBox | Fantasy, Sci-Fi, and Survival Stories</title>
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="site-logo" href="#home" aria-label="Go to the StreamBox homepage">StreamBox</a>
+
+      <nav class="main-nav" aria-label="Primary navigation">
+        <ul class="main-nav__list">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#details">Spotlight</a></li>
+          <li><a href="#catalog">Catalog</a></li>
+          <li><a href="#footer">Contact</a></li>
+        </ul>
+      </nav>
+
+      <a class="site-header__action button button--ghost" href="#details">Open spotlight</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home" aria-labelledby="hero-title">
+      <div class="container hero__inner">
+        <div class="hero__content">
+          <p class="hero__eyebrow">Epic stories</p>
+          <h1 class="hero__title" id="hero-title">Fantasy, sci-fi, and survival stories in one clean landing page</h1>
+          <p class="hero__text">
+            Explore a lineup built around well-known worlds like Game of Thrones, Andor,
+            The Lord of the Rings, Star Wars, and The Walking Dead. Click any poster to
+            load its synopsis in the spotlight section.
+          </p>
+
+          <div class="hero__actions">
+            <a class="button" href="#catalog">Browse catalog</a>
+            <a class="button button--ghost" href="#details">Open selected synopsis</a>
+          </div>
+        </div>
+
+        <div class="hero__media">
+          <div class="hero__carousel-header">
+            <p class="hero__carousel-title">Choose a title</p>
+            <span class="hero__carousel-hint">Click a poster to load its trailer and synopsis</span>
+          </div>
+
+          <div class="hero__carousel" aria-label="Featured poster carousel">
+            <article class="hero-slide">
+              <a
+                class="hero-slide__link media-trigger is-active"
+                href="#details"
+                data-media-trigger
+                data-title="Andor"
+                data-meta="Series | 2022 | Sci-fi drama"
+                data-image="images/posters/series/andor.jpg"
+                data-synopsis="A grounded Star Wars series that follows Cassian Andor as he moves from survivor to rebel hero."
+              >
+                <img class="hero-slide__image" src="images/posters/series/andor.jpg" alt="Poster of Andor">
+                <div class="hero-slide__body">
+                  <p class="hero-slide__title">Andor</p>
+                  <p class="hero-slide__meta">Sci-fi drama</p>
+                </div>
+              </a>
+            </article>
+
+            <article class="hero-slide">
+              <a
+                class="hero-slide__link media-trigger"
+                href="#details"
+                data-media-trigger
+                data-title="Game of Thrones"
+                data-meta="Series | 2011 | Fantasy drama"
+                data-image="images/posters/series/game-of-thrones.jpg"
+                data-synopsis="Nine noble families fight for power in Westeros while an ancient threat rises beyond the Wall."
+              >
+                <img class="hero-slide__image" src="images/posters/series/game-of-thrones.jpg" alt="Poster of Game of Thrones">
+                <div class="hero-slide__body">
+                  <p class="hero-slide__title">Game of Thrones</p>
+                  <p class="hero-slide__meta">Fantasy drama</p>
+                </div>
+              </a>
+            </article>
+
+            <article class="hero-slide">
+              <a
+                class="hero-slide__link media-trigger"
+                href="#details"
+                data-media-trigger
+                data-title="House of the Dragon"
+                data-meta="Series | 2022 | Fantasy drama"
+                data-image="images/posters/series/house-of-the-dragon.png"
+                data-synopsis="Set centuries before Game of Thrones, the Targaryen dynasty fractures as a brutal succession war begins."
+              >
+                <img class="hero-slide__image" src="images/posters/series/house-of-the-dragon.png" alt="Poster of House of the Dragon">
+                <div class="hero-slide__body">
+                  <p class="hero-slide__title">House of the Dragon</p>
+                  <p class="hero-slide__meta">Fantasy drama</p>
+                </div>
+              </a>
+            </article>
+
+            <article class="hero-slide">
+              <a
+                class="hero-slide__link media-trigger"
+                href="#details"
+                data-media-trigger
+                data-title="The Lord of the Rings"
+                data-meta="Movie | 2001 | Epic fantasy"
+                data-image="images/posters/movies/the-lord-of-the-rings.jpg"
+                data-synopsis="A humble hobbit begins a dangerous journey to destroy the One Ring and save Middle-earth."
+              >
+                <img class="hero-slide__image" src="images/posters/movies/the-lord-of-the-rings.jpg" alt="Poster of The Lord of the Rings">
+                <div class="hero-slide__body">
+                  <p class="hero-slide__title">The Lord of the Rings</p>
+                  <p class="hero-slide__meta">Epic fantasy</p>
+                </div>
+              </a>
+            </article>
+
+            <article class="hero-slide">
+              <a
+                class="hero-slide__link media-trigger"
+                href="#details"
+                data-media-trigger
+                data-title="The Rings of Power"
+                data-meta="Series | 2022 | Fantasy adventure"
+                data-image="images/posters/series/the-rings-of-power.jpg"
+                data-synopsis="Heroes, rulers, and wanderers face the return of darkness during the Second Age of Middle-earth."
+              >
+                <img class="hero-slide__image" src="images/posters/series/the-rings-of-power.jpg" alt="Poster of The Rings of Power">
+                <div class="hero-slide__body">
+                  <p class="hero-slide__title">The Rings of Power</p>
+                  <p class="hero-slide__meta">Fantasy adventure</p>
+                </div>
+              </a>
+            </article>
+
+            <article class="hero-slide">
+              <a
+                class="hero-slide__link media-trigger"
+                href="#details"
+                data-media-trigger
+                data-title="Dune"
+                data-meta="Movie | 2021 | Sci-fi epic"
+                data-image="images/posters/movies/dune.jpg"
+                data-synopsis="Paul Atreides arrives on Arrakis, where politics, prophecy, and war reshape his destiny."
+              >
+                <img class="hero-slide__image" src="images/posters/movies/dune.jpg" alt="Poster of Dune">
+                <div class="hero-slide__body">
+                  <p class="hero-slide__title">Dune</p>
+                  <p class="hero-slide__meta">Sci-fi epic</p>
+                </div>
+              </a>
+            </article>
+
+            <article class="hero-slide">
+              <a
+                class="hero-slide__link media-trigger"
+                href="#details"
+                data-media-trigger
+                data-title="Star Wars"
+                data-meta="Movie | 1977 | Space opera"
+                data-image="images/posters/movies/star-wars.jpg"
+                data-synopsis="Luke Skywalker joins a rebellion against a galactic empire and discovers the power of the Force."
+              >
+                <img class="hero-slide__image" src="images/posters/movies/star-wars.jpg" alt="Poster of Star Wars">
+                <div class="hero-slide__body">
+                  <p class="hero-slide__title">Star Wars</p>
+                  <p class="hero-slide__meta">Space opera</p>
+                </div>
+              </a>
+            </article>
+
+            <article class="hero-slide">
+              <a
+                class="hero-slide__link media-trigger"
+                href="#details"
+                data-media-trigger
+                data-title="The Mandalorian"
+                data-meta="Series | 2019 | Space western"
+                data-image="images/posters/series/the-mandalorian.jpg"
+                data-synopsis="A lone bounty hunter travels the outer rim and becomes the protector of a mysterious child."
+              >
+                <img class="hero-slide__image" src="images/posters/series/the-mandalorian.jpg" alt="Poster of The Mandalorian">
+                <div class="hero-slide__body">
+                  <p class="hero-slide__title">The Mandalorian</p>
+                  <p class="hero-slide__meta">Space western</p>
+                </div>
+              </a>
+            </article>
+
+            <article class="hero-slide">
+              <a
+                class="hero-slide__link media-trigger"
+                href="#details"
+                data-media-trigger
+                data-title="The Walking Dead"
+                data-meta="Series | 2010 | Post-apocalyptic drama"
+                data-image="images/posters/series/the-walking-dead.jpg"
+                data-synopsis="After a zombie apocalypse, a group of survivors searches for safety, family, and hope."
+              >
+                <img class="hero-slide__image" src="images/posters/series/the-walking-dead.jpg" alt="Poster of The Walking Dead">
+                <div class="hero-slide__body">
+                  <p class="hero-slide__title">The Walking Dead</p>
+                  <p class="hero-slide__meta">Post-apocalyptic drama</p>
+                </div>
+              </a>
+            </article>
+
+            <article class="hero-slide">
+              <a
+                class="hero-slide__link media-trigger"
+                href="#details"
+                data-media-trigger
+                data-title="The Last of Us"
+                data-meta="Series | 2023 | Survival drama"
+                data-image="images/posters/series/the-last-of-us.png"
+                data-synopsis="A hardened smuggler escorts a teenage girl across a ruined America in a story of loss and survival."
+              >
+                <img class="hero-slide__image" src="images/posters/series/the-last-of-us.png" alt="Poster of The Last of Us">
+                <div class="hero-slide__body">
+                  <p class="hero-slide__title">The Last of Us</p>
+                  <p class="hero-slide__meta">Survival drama</p>
+                </div>
+              </a>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="featured" id="details" aria-labelledby="details-title">
+      <div class="container">
+        <div class="featured__box">
+          <div class="featured__media">
+            <div class="featured__player">
+              <iframe
+                id="details-trailer"
+                src="https://www.youtube-nocookie.com/embed/PboKpnin_Wg?rel=0&modestbranding=1"
+                title="Andor trailer"
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen
+              ></iframe>
+            </div>
+          </div>
+
+          <div class="featured__content" aria-live="polite">
+            <p class="featured__eyebrow">Title spotlight</p>
+            <h2 class="section-title" id="details-title">Andor</h2>
+            <p class="featured__meta" id="details-meta">Series | 2022 | Sci-fi drama</p>
+            <div class="featured__copy">
+              <p class="featured__text" id="details-synopsis">
+                Cassian Andor is drawn into the earliest phase of the Rebel Alliance, where espionage, sacrifice, and political pressure shape the resistance long before Rogue One.
+              </p>
+
+              <div class="featured__info-list">
+                <p class="featured__info-item" id="details-credits">
+                  Created by Tony Gilroy. Directed by key filmmakers Toby Haynes and Susanna White. Starring Diego Luna, Stellan Skarsgard, and Genevieve O'Reilly.
+                </p>
+                <p class="featured__info-item featured__info-item--fact" id="details-fact">
+                  Interesting fact: season one was built in three-episode arcs, giving the story the rhythm of a political thriller.
+                </p>
+              </div>
+            </div>
+            <p class="featured__helper">Click any poster to load its trailer and synopsis here.</p>
+
+            <div class="featured__actions">
+              <a class="button" href="#catalog">Browse catalog</a>
+              <a class="button button--ghost" id="details-youtube-link" href="https://www.youtube.com/watch?v=PboKpnin_Wg" target="_blank" rel="noopener noreferrer">Watch on YouTube</a>
+              <a class="button button--ghost" href="#home">Back to top</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-rows" id="catalog">
+      <div class="container">
+        <section class="content-row" aria-labelledby="epic-title">
+          <div class="content-row__header">
+            <h2 class="section-title" id="epic-title">Epic worlds</h2>
+            <a class="content-row__link" href="#details">Open synopsis</a>
+          </div>
+
+          <div class="card-row">
+            <article class="card">
+              <a
+                class="card__link media-trigger"
+                href="#details"
+                data-media-trigger
+                data-title="Game of Thrones"
+                data-meta="Series | 2011 | Fantasy drama"
+                data-image="images/posters/series/game-of-thrones.jpg"
+                data-synopsis="Nine noble families fight for power in Westeros while an ancient threat rises beyond the Wall."
+              >
+                <img class="card__image" src="images/posters/series/game-of-thrones.jpg" alt="Poster of Game of Thrones">
+                <div class="card__body">
+                  <h3 class="card__title">Game of Thrones</h3>
+                  <p class="card__meta">Fantasy drama</p>
+                </div>
+              </a>
+            </article>
+
+            <article class="card">
+              <a
+                class="card__link media-trigger"
+                href="#details"
+                data-media-trigger
+                data-title="House of the Dragon"
+                data-meta="Series | 2022 | Fantasy drama"
+                data-image="images/posters/series/house-of-the-dragon.png"
+                data-synopsis="Set centuries before Game of Thrones, the Targaryen dynasty fractures as a brutal succession war begins."
+              >
+                <img class="card__image" src="images/posters/series/house-of-the-dragon.png" alt="Poster of House of the Dragon">
+                <div class="card__body">
+                  <h3 class="card__title">House of the Dragon</h3>
+                  <p class="card__meta">Fantasy drama</p>
+                </div>
+              </a>
+            </article>
+
+            <article class="card">
+              <a
+                class="card__link media-trigger"
+                href="#details"
+                data-media-trigger
+                data-title="The Lord of the Rings"
+                data-meta="Movie | 2001 | Epic fantasy"
+                data-image="images/posters/movies/the-lord-of-the-rings.jpg"
+                data-synopsis="A humble hobbit begins a dangerous journey to destroy the One Ring and save Middle-earth."
+              >
+                <img class="card__image" src="images/posters/movies/the-lord-of-the-rings.jpg" alt="Poster of The Lord of the Rings">
+                <div class="card__body">
+                  <h3 class="card__title">The Lord of the Rings</h3>
+                  <p class="card__meta">Epic fantasy</p>
+                </div>
+              </a>
+            </article>
+
+            <article class="card">
+              <a
+                class="card__link media-trigger"
+                href="#details"
+                data-media-trigger
+                data-title="The Rings of Power"
+                data-meta="Series | 2022 | Fantasy adventure"
+                data-image="images/posters/series/the-rings-of-power.jpg"
+                data-synopsis="Heroes, rulers, and wanderers face the return of darkness during the Second Age of Middle-earth."
+              >
+                <img class="card__image" src="images/posters/series/the-rings-of-power.jpg" alt="Poster of The Rings of Power">
+                <div class="card__body">
+                  <h3 class="card__title">The Rings of Power</h3>
+                  <p class="card__meta">Fantasy adventure</p>
+                </div>
+              </a>
+            </article>
+
+            <article class="card">
+              <a
+                class="card__link media-trigger"
+                href="#details"
+                data-media-trigger
+                data-title="Dune"
+                data-meta="Movie | 2021 | Sci-fi epic"
+                data-image="images/posters/movies/dune.jpg"
+                data-synopsis="Paul Atreides arrives on Arrakis, where politics, prophecy, and war reshape his destiny."
+              >
+                <img class="card__image" src="images/posters/movies/dune.jpg" alt="Poster of Dune">
+                <div class="card__body">
+                  <h3 class="card__title">Dune</h3>
+                  <p class="card__meta">Sci-fi epic</p>
+                </div>
+              </a>
+            </article>
+          </div>
+        </section>
+
+        <section class="content-row" aria-labelledby="survival-title">
+          <div class="content-row__header">
+            <h2 class="section-title" id="survival-title">Rebellion and survival</h2>
+            <a class="content-row__link" href="#details">Open synopsis</a>
+          </div>
+
+          <div class="card-row">
+            <article class="card">
+              <a
+                class="card__link media-trigger"
+                href="#details"
+                data-media-trigger
+                data-title="Andor"
+                data-meta="Series | 2022 | Sci-fi drama"
+                data-image="images/posters/series/andor.jpg"
+                data-synopsis="A grounded Star Wars series that follows Cassian Andor as he moves from survivor to rebel hero."
+              >
+                <img class="card__image" src="images/posters/series/andor.jpg" alt="Poster of Andor">
+                <div class="card__body">
+                  <h3 class="card__title">Andor</h3>
+                  <p class="card__meta">Sci-fi drama</p>
+                </div>
+              </a>
+            </article>
+
+            <article class="card">
+              <a
+                class="card__link media-trigger"
+                href="#details"
+                data-media-trigger
+                data-title="Star Wars"
+                data-meta="Movie | 1977 | Space opera"
+                data-image="images/posters/movies/star-wars.jpg"
+                data-synopsis="Luke Skywalker joins a rebellion against a galactic empire and discovers the power of the Force."
+              >
+                <img class="card__image" src="images/posters/movies/star-wars.jpg" alt="Poster of Star Wars">
+                <div class="card__body">
+                  <h3 class="card__title">Star Wars</h3>
+                  <p class="card__meta">Space opera</p>
+                </div>
+              </a>
+            </article>
+
+            <article class="card">
+              <a
+                class="card__link media-trigger"
+                href="#details"
+                data-media-trigger
+                data-title="The Mandalorian"
+                data-meta="Series | 2019 | Space western"
+                data-image="images/posters/series/the-mandalorian.jpg"
+                data-synopsis="A lone bounty hunter travels the outer rim and becomes the protector of a mysterious child."
+              >
+                <img class="card__image" src="images/posters/series/the-mandalorian.jpg" alt="Poster of The Mandalorian">
+                <div class="card__body">
+                  <h3 class="card__title">The Mandalorian</h3>
+                  <p class="card__meta">Space western</p>
+                </div>
+              </a>
+            </article>
+
+            <article class="card">
+              <a
+                class="card__link media-trigger"
+                href="#details"
+                data-media-trigger
+                data-title="The Walking Dead"
+                data-meta="Series | 2010 | Post-apocalyptic drama"
+                data-image="images/posters/series/the-walking-dead.jpg"
+                data-synopsis="After a zombie apocalypse, a group of survivors searches for safety, family, and hope."
+              >
+                <img class="card__image" src="images/posters/series/the-walking-dead.jpg" alt="Poster of The Walking Dead">
+                <div class="card__body">
+                  <h3 class="card__title">The Walking Dead</h3>
+                  <p class="card__meta">Post-apocalyptic drama</p>
+                </div>
+              </a>
+            </article>
+
+            <article class="card">
+              <a
+                class="card__link media-trigger"
+                href="#details"
+                data-media-trigger
+                data-title="The Last of Us"
+                data-meta="Series | 2023 | Survival drama"
+                data-image="images/posters/series/the-last-of-us.png"
+                data-synopsis="A hardened smuggler escorts a teenage girl across a ruined America in a story of loss and survival."
+              >
+                <img class="card__image" src="images/posters/series/the-last-of-us.png" alt="Poster of The Last of Us">
+                <div class="card__body">
+                  <h3 class="card__title">The Last of Us</h3>
+                  <p class="card__meta">Survival drama</p>
+                </div>
+              </a>
+            </article>
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="footer">
+    <div class="container site-footer__inner">
+      <div class="site-footer__info">
+        <p class="site-footer__brand">StreamBox</p>
+        <small class="site-footer__copy">KeepCoding Web Development Bootcamp Edition XX - Final HTML and SCSS project</small>
+        <small class="site-footer__legal">&copy; 2026 StreamBox. All rights reserved.</small>
+      </div>
+
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <ul class="footer-nav__list">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#details">Spotlight</a></li>
+          <li><a href="#catalog">Catalog</a></li>
+          <li><a href="#home">Back to top</a></li>
+        </ul>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="scripts/media-library.js"></script>
+  <script src="scripts/main.js"></script>
+</body>
+</html>

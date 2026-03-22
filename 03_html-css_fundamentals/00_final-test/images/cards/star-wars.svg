@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 750" role="img" aria-labelledby="title desc">
+  <title id="title">Star Wars</title>
+  <desc id="desc">Poster placeholder for Star Wars.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#081423" />
+      <stop offset="100%" stop-color="#2a1a3b" />
+    </linearGradient>
+  </defs>
+  <rect width="600" height="750" fill="url(#bg)" />
+  <circle cx="180" cy="180" r="6" fill="#ffffff" opacity="0.7" />
+  <circle cx="260" cy="120" r="4" fill="#ffffff" opacity="0.7" />
+  <circle cx="420" cy="210" r="5" fill="#ffffff" opacity="0.7" />
+  <circle cx="500" cy="140" r="4" fill="#ffffff" opacity="0.7" />
+  <circle cx="310" cy="270" r="130" fill="#ffffff" opacity="0.06" />
+  <rect x="50" y="520" width="500" height="160" rx="24" fill="#0f1117" opacity="0.46" />
+  <text x="50" y="620" fill="#ffffff" font-family="Arial, sans-serif" font-size="66" font-weight="700">STAR WARS</text>
+</svg>

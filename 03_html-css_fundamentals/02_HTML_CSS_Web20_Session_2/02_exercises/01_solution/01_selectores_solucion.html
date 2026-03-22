@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solución · Selectores CSS</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 24px;
+    }
+
+    h1 {
+      color: #6a0dad;
+    }
+
+    .card {
+      background: #f7f1ff;
+      padding: 16px;
+      margin-bottom: 16px;
+      border-radius: 12px;
+    }
+
+    #destacado {
+      color: #c2185b;
+      font-weight: bold;
+    }
+
+    nav a {
+      font-weight: bold;
+      margin-right: 12px;
+      color: #333;
+      text-decoration: none;
+    }
+
+    button {
+      padding: 10px 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #e6dafc;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Práctica de selectores CSS</h1>
+    <nav>
+      <a href="#">Inicio</a>
+      <a href="#">Servicios</a>
+      <a href="#">Contacto</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>Card principal</h2>
+      <p id="destacado">Este texto debe destacarse con un estilo diferente.</p>
+      <button>Ver más</button>
+    </section>
+
+    <section class="card">
+      <h2>Segunda card</h2>
+      <p>Contenido de apoyo para practicar selectores.</p>
+      <button>Acceder</button>
+    </section>
+  </main>
+</body>
+</html>

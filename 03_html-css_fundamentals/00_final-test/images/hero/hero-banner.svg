@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">Hero banner</title>
+  <desc id="desc">Illustrated hero banner for the StreamBox landing page.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#29070b" />
+      <stop offset="50%" stop-color="#141824" />
+      <stop offset="100%" stop-color="#2e203d" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)" />
+  <circle cx="930" cy="190" r="120" fill="#e50914" opacity="0.18" />
+  <circle cx="1010" cy="630" r="190" fill="#ffffff" opacity="0.05" />
+  <rect x="85" y="115" width="1030" height="570" rx="32" fill="#0f1117" opacity="0.52" />
+  <rect x="145" y="165" width="620" height="28" rx="14" fill="#ffffff" opacity="0.14" />
+  <rect x="145" y="225" width="470" height="28" rx="14" fill="#ffffff" opacity="0.14" />
+  <rect x="145" y="305" width="390" height="205" rx="26" fill="#e50914" opacity="0.75" />
+  <rect x="575" y="305" width="470" height="205" rx="26" fill="#222836" />
+  <rect x="575" y="545" width="470" height="75" rx="20" fill="#171b26" />
+  <text x="145" y="610" fill="#ffffff" font-family="Arial, sans-serif" font-size="74" font-weight="700">STREAMBOX</text>
+  <text x="145" y="670" fill="#bac1d0" font-family="Arial, sans-serif" font-size="30">Stories for the night</text>
+</svg>
