@@ -1,7 +1,7 @@
 # Final React Fundamentals Project
 
 <p align="center">
-  <img src="00_images/screenshots/products-list.png" alt="Products dashboard and filters" width="90%">
+  <img src="00_images/screenshots/products-list-current.png" alt="Products dashboard and filters" width="90%">
 </p>
 
 <p align="center">
@@ -46,7 +46,7 @@ This application manages a catalog of retro consoles and classic video games.
 The main behavior is:
 
 - authenticate the user before entering the dashboard
-- request data from the backend using the token in the `Authorization` header
+- request data from the backend after login
 - show a product list with price, tags and sale status
 - filter the list by product name and sale status
 - navigate to a product detail page
@@ -62,19 +62,19 @@ The main behavior is:
 ### Login
 
 <p align="center">
-  <img src="00_images/screenshots/login-page.png" alt="Login page" width="72%">
+  <img src="00_images/screenshots/login-page-current.png" alt="Login page" width="72%">
 </p>
 
 ### Product Detail
 
 <p align="center">
-  <img src="00_images/screenshots/product-detail.png" alt="Product detail page" width="90%">
+  <img src="00_images/screenshots/product-detail-current.png" alt="Product detail page" width="90%">
 </p>
 
 ### New Product Form
 
 <p align="center">
-  <img src="00_images/screenshots/new-product-form.png" alt="New product form" width="90%">
+  <img src="00_images/screenshots/new-product-form-current.png" alt="New product form" width="90%">
 </p>
 
 ---
@@ -140,10 +140,3 @@ npm run dev
 - Password: `skywalker`
 
 ---
-
-## Notes
-
-- The project intentionally avoids form libraries in order to stay aligned with the module requirements.
-- All required form fields are handled with React state and disabled submit logic.
-- Product filters are applied in the frontend because the backend used in the exercise does not support filtered queries.
-- The backend used in the course is included separately inside `01_react-fundamentos-course/server`.

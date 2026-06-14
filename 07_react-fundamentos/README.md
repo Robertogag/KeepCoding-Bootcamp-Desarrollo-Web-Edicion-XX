@@ -1,7 +1,7 @@
 # React Fundamentals
 
 <p align="center">
-  <img src="00_images/react-fundamentos-overview.png" alt="React Fundamentals module overview" width="950">
+  <img src="00_images/react-fundamentos-overview-current.png" alt="React Fundamentals module overview" width="950">
 </p>
 
 <p align="center">
