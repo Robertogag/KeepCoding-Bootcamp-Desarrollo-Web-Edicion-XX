@@ -1,7 +1,7 @@
 # Final React Fundamentals Project
 
 <p align="center">
-  <img src="00_images/screenshots/products-list-current.png" alt="Products dashboard and filters" width="90%">
+  <img src="00_images/screenshots/products-list-current.png" alt="Products dashboard and filters" width="86%">
 </p>
 
 <p align="center">
@@ -62,19 +62,19 @@ The main behavior is:
 ### Login
 
 <p align="center">
-  <img src="00_images/screenshots/login-page-current.png" alt="Login page" width="72%">
+  <img src="00_images/screenshots/login-page-current.png" alt="Login page" width="48%">
 </p>
 
 ### Product Detail
 
 <p align="center">
-  <img src="00_images/screenshots/product-detail-current.png" alt="Product detail page" width="90%">
+  <img src="00_images/screenshots/product-detail-current.png" alt="Product detail page" width="86%">
 </p>
 
 ### New Product Form
 
 <p align="center">
-  <img src="00_images/screenshots/new-product-form-current.png" alt="New product form" width="90%">
+  <img src="00_images/screenshots/new-product-form-current.png" alt="New product form" width="86%">
 </p>
 
 ---
