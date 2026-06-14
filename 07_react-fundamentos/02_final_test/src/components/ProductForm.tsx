@@ -94,7 +94,9 @@ export function ProductForm({
 
     return (
         <form className="form" onSubmit={handleSubmit}>
-            <p className="hint">Los campos con * son obligatorios. La foto es opcional.</p>
+            <p className="hint">
+                Los campos con * son obligatorios. La foto es opcional.
+            </p>
 
             <label className="field">
                 <span className="field__label">

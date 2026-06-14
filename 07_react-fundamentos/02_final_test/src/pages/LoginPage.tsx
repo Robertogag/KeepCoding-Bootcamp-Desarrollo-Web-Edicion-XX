@@ -20,10 +20,7 @@ const initialFormValues: LoginFormValues = {
     remember: false,
 };
 
-export function LoginPage({
-    isAuthenticated,
-    onLogin,
-}: LoginPageProps) {
+export function LoginPage({ isAuthenticated, onLogin }: LoginPageProps) {
     const [formValues, setFormValues] =
         useState<LoginFormValues>(initialFormValues);
     const [error, setError] = useState('');
@@ -54,11 +51,11 @@ export function LoginPage({
             onLogin();
             navigate('/products', { replace: true });
         } catch (error) {
-                setError(
-                    error instanceof Error
-                        ? error.message
-                        : 'No se pudo iniciar sesión',
-                );
+            setError(
+                error instanceof Error
+                    ? error.message
+                    : 'No se pudo iniciar sesión',
+            );
         } finally {
             setIsSubmitting(false);
         }
