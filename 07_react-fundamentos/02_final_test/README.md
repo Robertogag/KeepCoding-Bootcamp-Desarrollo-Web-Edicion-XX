@@ -38,6 +38,12 @@ The project includes:
 - frontend filtering over the product list
 
 ---
+Open `http://localhost:5173`
+
+### Demo Credentials
+
+- Username: `luke`
+- Password: `skywalker`
 
 ## What The Project Does
 
