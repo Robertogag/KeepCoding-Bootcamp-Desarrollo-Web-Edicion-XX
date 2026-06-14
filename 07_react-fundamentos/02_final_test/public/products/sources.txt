@@ -1,0 +1,33 @@
+Image sources
+
+nes-console.jpg
+Source: https://commons.wikimedia.org/wiki/File:NES-Console-Set.jpg
+Author: Evan-Amos
+License: Public domain
+
+snes-console.jpg
+Source: https://commons.wikimedia.org/wiki/File:SNES-Mod1-Console-Set.jpg
+Author: Evan-Amos
+License: Public domain
+
+sega-genesis.jpg
+Source: https://commons.wikimedia.org/wiki/File:Sega-Genesis-Mk2-Console-01.jpg
+Author: Evan-Amos
+License: Public domain
+
+game-boy.jpg
+Source: https://commons.wikimedia.org/wiki/File:Game-Boy-Original.jpg
+Author: Evan-Amos
+License: Public domain
+
+killer-instinct-snes.jpg
+Source: https://www.ebay.com/itm/389368873734
+
+zelda-link-to-the-past-snes.jpg
+Source: https://business.walmart.com/ip/SNES-Games-Cartridge-Legend-of-Zelda-The-A-Link-to-the-Past/17280623188
+
+donkey-kong-country-snes.jpg
+Source: https://www.walmart.com/ip/Donkey-Kong-Country-1-2-3-All-Version-Snes-USA-Cartridge-Super-Game-For-Nintendo/5345639458
+
+pokemon-red-game-boy.jpg
+Source: https://www.ebay.com/itm/176414062249
