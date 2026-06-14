@@ -159,7 +159,7 @@ export function ProductForm({
 
             <label className="field">
                 <span className="field__label">
-                    Descripcion <span className="required-mark">*</span>
+                    Descripción <span className="required-mark">*</span>
                 </span>
                 <textarea
                     name="description"

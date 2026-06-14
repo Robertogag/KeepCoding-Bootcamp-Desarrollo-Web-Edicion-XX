@@ -11,7 +11,7 @@ interface UserLookupResponse {
 
 async function readErrorMessage(response: Response) {
     const data = await response.json().catch(() => null);
-    return data?.message ?? 'No se pudo iniciar sesion';
+    return data?.message ?? 'No se pudo iniciar sesión';
 }
 
 async function resolveUsername(identifier: string) {

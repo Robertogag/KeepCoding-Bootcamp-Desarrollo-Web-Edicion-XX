@@ -59,8 +59,8 @@ export function Layout({ onLogout }: LayoutProps) {
                 {showLogoutConfirm && (
                     <section className="page">
                         <ConfirmAction
-                            message="Quieres cerrar la sesion?"
-                            confirmLabel="Cerrar sesion"
+                            message="¿Quieres cerrar la sesión?"
+                            confirmLabel="Cerrar sesión"
                             onConfirm={handleLogout}
                             onCancel={() => setShowLogoutConfirm(false)}
                         />

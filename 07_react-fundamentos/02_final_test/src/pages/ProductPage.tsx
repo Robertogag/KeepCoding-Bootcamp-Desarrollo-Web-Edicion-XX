@@ -199,10 +199,10 @@ export function ProductPage() {
                             : 'Sin tags'}
                     </p>
                     <p>
-                        <strong>Oferta:</strong> {product.isOnSale ? 'Si' : 'No'}
+                        <strong>Oferta:</strong> {product.isOnSale ? 'Sí' : 'No'}
                     </p>
                     <p>
-                        <strong>Descripcion:</strong> {product.description}
+                        <strong>Descripción:</strong> {product.description}
                     </p>
                 </div>
             </div>
@@ -218,7 +218,7 @@ export function ProductPage() {
                         }}
                         disabled={isDeleting || isSaving}
                     >
-                        {showEditForm ? 'Cancelar edicion' : 'Editar producto'}
+                        {showEditForm ? 'Cancelar edición' : 'Editar producto'}
                     </button>
 
                     <button
@@ -245,7 +245,7 @@ export function ProductPage() {
                                 submitLabel="Guardar cambios"
                                 imageHint={
                                     product.image
-                                        ? 'Deja la foto vacia para mantener la actual.'
+                                        ? 'Deja la foto vacía para mantener la actual.'
                                         : undefined
                                 }
                                 onSubmit={handleUpdate}
@@ -258,8 +258,8 @@ export function ProductPage() {
 
                 {showDeleteConfirm && (
                     <ConfirmAction
-                        message="Seguro que quieres borrar este producto?"
-                        confirmLabel="Si, borrar"
+                        message="¿Seguro que quieres borrar este producto?"
+                        confirmLabel="Sí, borrar"
                         onConfirm={handleDelete}
                         onCancel={() => setShowDeleteConfirm(false)}
                     />

@@ -54,11 +54,11 @@ export function LoginPage({
             onLogin();
             navigate('/products', { replace: true });
         } catch (error) {
-            setError(
-                error instanceof Error
-                    ? error.message
-                    : 'No se pudo iniciar sesion',
-            );
+                setError(
+                    error instanceof Error
+                        ? error.message
+                        : 'No se pudo iniciar sesión',
+                );
         } finally {
             setIsSubmitting(false);
         }
@@ -82,7 +82,7 @@ export function LoginPage({
                     </label>
 
                     <label className="field">
-                        <span>Contrasena</span>
+                        <span>Contraseña</span>
                         <input
                             type="password"
                             name="password"
@@ -99,7 +99,7 @@ export function LoginPage({
                             checked={formValues.remember}
                             onChange={handleChange}
                         />
-                        <span>Recordar sesion</span>
+                        <span>Recordar sesión</span>
                     </label>
 
                     {error && <p className="error">{error}</p>}
