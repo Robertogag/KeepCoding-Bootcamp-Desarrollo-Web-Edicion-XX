@@ -97,7 +97,7 @@ export function ProductsPage() {
                         >
                             <option value="all">Todos</option>
                             <option value="sale">En oferta</option>
-                            <option value="not-sale">No oferta</option>
+                            <option value="not-sale">Sin oferta</option>
                         </select>
                     </label>
                 </div>

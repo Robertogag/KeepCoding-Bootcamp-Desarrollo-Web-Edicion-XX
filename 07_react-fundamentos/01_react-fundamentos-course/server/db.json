@@ -2,16 +2,147 @@
   "products": [
     {
       "id": 1,
-      "name": "Update product 1",
-      "price": 10,
+      "name": "Nintendo Entertainment System (NES)",
+      "price": 149.99,
+      "tags": [
+        "nintendo",
+        "retro",
+        "8-bits",
+        "reacondicionado"
+      ],
+      "image": "/products/nes-console.jpg",
+      "isOnSale": true,
+      "description": "Consola retro original que marcó una época y sigue siendo una de las piezas más reconocibles del catálogo de Nintendo. Es ideal para colección o para volver a disfrutar la experiencia clásica de 8 bits con un sistema sencillo, icónico y muy fácil de identificar.",
       "userId": 2
     },
     {
-      "name": "Mouse",
-      "userId": 2,
-      "updatedAt": "2025-12-06T20:34:51.788Z",
-      "id": 3
+      "id": 2,
+      "name": "Super Nintendo Entertainment System",
+      "price": 189.99,
+      "tags": [
+        "nintendo",
+        "retro",
+        "16-bits",
+        "reacondicionado"
+      ],
+      "image": "/products/snes-console.jpg",
+      "isOnSale": false,
+      "description": "Una de las consolas más queridas de los 90 por su salto gráfico, su sonido y la calidad de su catálogo. Es una compra muy atractiva para quien busca una máquina clásica asociada a juegos de referencia como Zelda, Donkey Kong Country y Killer Instinct.",
+      "userId": 2
+    },
+    {
+      "id": 3,
+      "name": "Sega Genesis Model 2",
+      "price": 159.99,
+      "tags": [
+        "sega",
+        "retro",
+        "16-bits",
+        "usado"
+      ],
+      "image": "/products/sega-genesis.jpg",
+      "isOnSale": true,
+      "description": "Versión compacta de la Sega Genesis, muy buscada por quienes prefieren el lado más arcade de la generación de 16 bits. Su diseño es reconocible, ocupa poco espacio y conecta muy bien con el espíritu clásico de Sega.",
+      "userId": 2
+    },
+    {
+      "id": 4,
+      "name": "Nintendo Game Boy",
+      "price": 119.99,
+      "tags": [
+        "nintendo",
+        "retro",
+        "portátil",
+        "8-bits",
+        "reacondicionado"
+      ],
+      "image": "/products/game-boy.jpg",
+      "isOnSale": false,
+      "description": "Portátil clásica de Nintendo, famosa por su autonomía, su resistencia y su catálogo histórico. Sigue siendo una pieza muy fuerte para colección y una forma auténtica de volver a jugar grandes nombres de la era portátil.",
+      "userId": 2
+    },
+    {
+      "id": 5,
+      "name": "Killer Instinct (SNES)",
+      "price": 44.99,
+      "tags": [
+        "snes",
+        "juego",
+        "retro",
+        "lucha",
+        "usado"
+      ],
+      "image": "/products/killer-instinct-snes.jpg",
+      "isOnSale": true,
+      "description": "Cartucho clásico de lucha para Super Nintendo, recordado por su velocidad, sus combos y su personalidad visual. Es uno de esos juegos que se siguen buscando por nostalgia y por lo bien que representa el carácter más intenso de los 16 bits.",
+      "userId": 2
+    },
+    {
+      "id": 6,
+      "name": "The Legend of Zelda: A Link to the Past (SNES)",
+      "price": 59.99,
+      "tags": [
+        "snes",
+        "juego",
+        "retro",
+        "aventura",
+        "usado"
+      ],
+      "image": "/products/zelda-link-to-the-past-snes.jpg",
+      "isOnSale": false,
+      "description": "Una de las aventuras mejor valoradas del catálogo de Super Nintendo y uno de los cartuchos más recomendados cuando se habla de clásicos. Combina exploración, mazmorras y puzles en una fórmula que sigue funcionando de maravilla incluso hoy.",
+      "userId": 2
+    },
+    {
+      "id": 7,
+      "name": "Pokemon Red Version (Game Boy)",
+      "price": 69.99,
+      "tags": [
+        "game-boy",
+        "juego",
+        "retro",
+        "rpg",
+        "usado"
+      ],
+      "image": "/products/pokemon-red-game-boy.jpg",
+      "isOnSale": false,
+      "description": "El cartucho que inició el fenómeno mundial de Pokémon en portátil. Capturar, entrenar e intercambiar criaturas convirtió esta entrega en una referencia absoluta del catálogo de Game Boy y en uno de los nombres más importantes de Nintendo.",
+      "userId": 2
+    },
+    {
+      "id": 8,
+      "name": "Donkey Kong Country (SNES)",
+      "price": 39.99,
+      "tags": [
+        "snes",
+        "juego",
+        "retro",
+        "plataformas",
+        "usado"
+      ],
+      "image": "/products/donkey-kong-country-snes.jpg",
+      "isOnSale": true,
+      "description": "Uno de los plataformas más celebrados de Super Nintendo y un título clave dentro de la etapa clásica de Rare. Sus gráficos prerenderizados, su música y su ritmo lo mantienen como uno de los juegos retro más recordados por crítica y jugadores.",
+      "userId": 1
     }
+  ],
+  "tags": [
+    "nintendo",
+    "sega",
+    "retro",
+    "portátil",
+    "8-bits",
+    "16-bits",
+    "colección",
+    "reacondicionado",
+    "usado",
+    "juego",
+    "snes",
+    "game-boy",
+    "lucha",
+    "aventura",
+    "rpg",
+    "plataformas"
   ],
   "users": [
     {

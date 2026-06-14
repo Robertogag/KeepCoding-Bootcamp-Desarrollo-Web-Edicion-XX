@@ -50,7 +50,7 @@ export function Layout({ onLogout }: LayoutProps) {
                         className="button button--ghost"
                         onClick={() => setShowLogoutConfirm(true)}
                     >
-                        Logout
+                        Cerrar sesión
                     </button>
                 </div>
             </header>

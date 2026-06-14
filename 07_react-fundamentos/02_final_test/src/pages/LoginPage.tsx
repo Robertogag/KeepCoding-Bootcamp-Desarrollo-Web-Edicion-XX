@@ -67,11 +67,11 @@ export function LoginPage({
     return (
         <section className="page">
             <div className="panel panel--narrow">
-                <h1>Login</h1>
+                <h1>Iniciar sesión</h1>
 
                 <form className="form" onSubmit={handleSubmit}>
                     <label className="field">
-                        <span>Email</span>
+                        <span>Usuario o email</span>
                         <input
                             type="text"
                             name="email"

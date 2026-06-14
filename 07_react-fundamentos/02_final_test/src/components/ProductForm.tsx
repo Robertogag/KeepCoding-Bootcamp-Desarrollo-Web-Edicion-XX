@@ -154,7 +154,7 @@ export function ProductForm({
                     checked={formValues.isOnSale}
                     onChange={handleInputChange}
                 />
-                <span>Es oferta</span>
+                <span>Está en oferta</span>
             </label>
 
             <label className="field">
