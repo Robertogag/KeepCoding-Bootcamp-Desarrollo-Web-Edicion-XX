@@ -1,0 +1,90 @@
+{
+  "info": {
+    "name": "Wallashop",
+    "description": "Colección de endpoints CRUD de productos",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:3000"
+    }
+  ],
+  "item": [
+    {
+      "name": "Listar productos",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{base_url}}/products",
+          "host": ["{{base_url}}"],
+          "path": ["products"]
+        }
+      }
+    },
+    {
+      "name": "Obtener producto por ID",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{base_url}}/products/1",
+          "host": ["{{base_url}}"],
+          "path": ["products", "1"]
+        }
+      }
+    },
+    {
+      "name": "Crear producto",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/products",
+          "host": ["{{base_url}}"],
+          "path": ["products"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Producto de ejemplo\",\n  \"description\": \"Descripción del producto\",\n  \"price\": 29.99\n}"
+        }
+      }
+    },
+    {
+      "name": "Actualizar producto",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/products/1",
+          "host": ["{{base_url}}"],
+          "path": ["products", "1"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Producto actualizado\",\n  \"price\": 39.99\n}"
+        }
+      }
+    },
+    {
+      "name": "Eliminar producto",
+      "request": {
+        "method": "DELETE",
+        "url": {
+          "raw": "{{base_url}}/products/1",
+          "host": ["{{base_url}}"],
+          "path": ["products", "1"]
+        }
+      }
+    }
+  ]
+}
