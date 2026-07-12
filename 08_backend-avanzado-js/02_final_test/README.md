@@ -162,7 +162,7 @@ The `postman/` folder contains `BookShop.postman_collection.json` ready to impor
 
 ---
 
-## Architecture (hexagonal)
+## Architecture
 
 ```
 src/
