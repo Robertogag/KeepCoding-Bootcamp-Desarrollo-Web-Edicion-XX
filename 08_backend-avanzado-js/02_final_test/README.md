@@ -1,6 +1,10 @@
 # BookShop API — Final Advanced Backend Project
 
 <p align="center">
+  <img src="00_images/screenshots/maildev-sale-email.png" alt="Sale notification email received in MailDev" width="90%">
+</p>
+
+<p align="center">
   <img src="https://img.shields.io/badge/Express-REST%20API-000000?logo=express&logoColor=white" alt="Express">
   <img src="https://img.shields.io/badge/TypeScript-Strict-3178c6?logo=typescript&logoColor=white" alt="TypeScript">
   <img src="https://img.shields.io/badge/Prisma-PostgreSQL-2D3748?logo=prisma&logoColor=white" alt="Prisma">
@@ -159,6 +163,34 @@ npm test
 ## Postman
 
 The `postman/` folder contains `BookShop.postman_collection.json` ready to import. Suggested flow: **Signup → Signin** (stores the `accessToken` automatically in the collection variables) → **Create book** (stores the `bookId`) → the rest of the requests. To test a purchase, register a second user and Signin with it before **Buy book** (a user cannot buy their own books).
+
+---
+
+## Screenshots
+
+**Public catalog (`GET /books`)** — only `PUBLISHED` books (the sold one is excluded) with pagination metadata:
+
+<p align="center">
+  <img src="00_images/screenshots/catalog-response.png" alt="Public catalog JSON response" width="90%">
+</p>
+
+**Partial search by author (`GET /books?search=rowling`)**:
+
+<p align="center">
+  <img src="00_images/screenshots/catalog-search-rowling.png" alt="Partial search by author" width="90%">
+</p>
+
+**MailDev inbox** — the sale notification and the weekly price suggestion, both delivered by the API:
+
+<p align="center">
+  <img src="00_images/screenshots/maildev-inbox.png" alt="MailDev inbox with both notification emails" width="90%">
+</p>
+
+**Weekly scheduled task email** — sent for a book published for more than 7 days:
+
+<p align="center">
+  <img src="00_images/screenshots/maildev-price-suggestion.png" alt="Price reduction suggestion email" width="90%">
+</p>
 
 ---
 
