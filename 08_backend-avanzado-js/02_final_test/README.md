@@ -144,6 +144,10 @@ GET /books?page=1&limit=10&search=rowling
 
 Every **Monday at 09:00** (`node-cron`, `0 9 * * 1`) the API runs `SuggestPriceReductionUseCase`: it finds `PUBLISHED` books listed for more than 7 days and emails each owner suggesting a price review to improve the chances of selling.
 
+<p align="center">
+  <img src="00_images/screenshots/maildev-price-suggestion.png" alt="Price reduction suggestion email received in MailDev" width="90%">
+</p>
+
 ---
 
 ## Testing (E2E)
@@ -179,39 +183,7 @@ The `postman/` folder contains `BookShop.postman_collection.json` ready to impor
 The collection was also executed end to end with **newman** (Postman's CLI runner) against the running API — 8 requests, 0 failures (the `403` on **Buy book** is the "you cannot buy your own book" rule responding as expected):
 
 <p align="center">
-  <img src="00_images/screenshots/postman-newman-summary.png" alt="Newman collection run summary" width="90%">
-</p>
-
-<p align="center">
   <img src="00_images/screenshots/postman-newman-requests.png" alt="Newman collection run requests" width="90%">
-</p>
-
----
-
-## Screenshots
-
-**Public catalog (`GET /books`)** — only `PUBLISHED` books (the sold one is excluded) with pagination metadata:
-
-<p align="center">
-  <img src="00_images/screenshots/catalog-response.png" alt="Public catalog JSON response" width="90%">
-</p>
-
-**Partial search by author (`GET /books?search=rowling`)**:
-
-<p align="center">
-  <img src="00_images/screenshots/catalog-search-rowling.png" alt="Partial search by author" width="90%">
-</p>
-
-**MailDev inbox** — the sale notification and the weekly price suggestion, both delivered by the API:
-
-<p align="center">
-  <img src="00_images/screenshots/maildev-inbox.png" alt="MailDev inbox with both notification emails" width="90%">
-</p>
-
-**Weekly scheduled task email** — sent for a book published for more than 7 days:
-
-<p align="center">
-  <img src="00_images/screenshots/maildev-price-suggestion.png" alt="Price reduction suggestion email" width="90%">
 </p>
 
 ---
