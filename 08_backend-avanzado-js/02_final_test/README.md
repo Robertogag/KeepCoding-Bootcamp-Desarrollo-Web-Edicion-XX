@@ -164,6 +164,18 @@ npm test
 
 The `postman/` folder contains `BookShop.postman_collection.json` ready to import. Suggested flow: **Signup → Signin** (stores the `accessToken` automatically in the collection variables) → **Create book** (stores the `bookId`) → the rest of the requests. To test a purchase, register a second user and Signin with it before **Buy book** (a user cannot buy their own books).
 
+**Signin (`200 OK`)** — returns the JWT `accessToken`:
+
+<p align="center">
+  <img src="00_images/screenshots/postman-signin.png" alt="Signin request in Postman returning the JWT" width="90%">
+</p>
+
+**Create book (`201 Created`)** — the book is born `PUBLISHED` with `soldAt = null`, owned by the authenticated user:
+
+<p align="center">
+  <img src="00_images/screenshots/postman-create-book.png" alt="Create book request in Postman" width="90%">
+</p>
+
 The collection was also executed end to end with **newman** (Postman's CLI runner) against the running API — 8 requests, 0 failures (the `403` on **Buy book** is the "you cannot buy your own book" rule responding as expected):
 
 <p align="center">

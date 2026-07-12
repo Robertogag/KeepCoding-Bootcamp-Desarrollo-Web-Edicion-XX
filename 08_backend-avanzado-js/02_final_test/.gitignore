@@ -2,3 +2,7 @@ node_modules/
 dist/
 
 .env
+
+# Postman local workspace artifacts
+postman/.postman/
+postman/postman/
