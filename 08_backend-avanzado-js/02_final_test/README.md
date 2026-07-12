@@ -9,6 +9,7 @@
   <img src="https://img.shields.io/badge/Status-Ready%20to%20Run-brightgreen" alt="Status">
 </p>
 
+---
 
 ## Context
 
@@ -138,6 +139,10 @@ GET /books?page=1&limit=10&search=rowling
 ### Sale notification (domain events)
 
 `BuyBookUseCase` publishes a `book.sold` domain event on the `EventBus`. The subscriber (registered in `src/index.ts`) looks up the seller and sends the email through Nodemailer → MailDev. If the email fails, the already-completed purchase is not affected.
+
+<p align="center">
+  <img src="00_images/screenshots/maildev-sale-email.png" alt="Sale notification email received in MailDev" width="90%">
+</p>
 
 ### Price reduction suggestion (scheduled task)
 
