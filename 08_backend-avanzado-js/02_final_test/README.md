@@ -45,6 +45,8 @@ Build the complete API applying the stack used during the module — Express, Ty
 - npm
 - PostgreSQL: Docker (recommended) **or** a native PostgreSQL 17 installation
 
+---
+
 ## Getting Started
 
 ```bash
@@ -68,6 +70,8 @@ npm start
 ```
 
 The server runs at `http://localhost:3000`. MailDev (with Docker) at `http://localhost:1080`.
+
+---
 
 ## Available Scripts
 
