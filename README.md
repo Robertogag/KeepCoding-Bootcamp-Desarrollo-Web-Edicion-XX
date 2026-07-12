@@ -107,6 +107,7 @@ The goal is not only to store final results, but also to reflect a clear technic
 | `02_sql_modeling/` | SQL modeling module, exercises and final practice |
 | `03_html-css_fundamentals/` | HTML5, CSS and SCSS fundamentals module with final landing page project |
 | `07_react-fundamentos/` | React fundamentals module with course material and final CRUD dashboard project |
+| `08_backend-avanzado-js/` | Advanced backend module with Node.js, Express, Prisma and the BookShop API final practice |
 
 ---
 
