@@ -9,7 +9,6 @@
   <img src="https://img.shields.io/badge/Status-Ready%20to%20Run-brightgreen" alt="Status">
 </p>
 
----
 
 ## Context
 
