@@ -164,6 +164,16 @@ npm test
 
 The `postman/` folder contains `BookShop.postman_collection.json` ready to import. Suggested flow: **Signup → Signin** (stores the `accessToken` automatically in the collection variables) → **Create book** (stores the `bookId`) → the rest of the requests. To test a purchase, register a second user and Signin with it before **Buy book** (a user cannot buy their own books).
 
+The collection was also executed end to end with **newman** (Postman's CLI runner) against the running API — 8 requests, 0 failures (the `403` on **Buy book** is the "you cannot buy your own book" rule responding as expected):
+
+<p align="center">
+  <img src="00_images/screenshots/postman-newman-summary.png" alt="Newman collection run summary" width="90%">
+</p>
+
+<p align="center">
+  <img src="00_images/screenshots/postman-newman-requests.png" alt="Newman collection run requests" width="90%">
+</p>
+
 ---
 
 ## Screenshots

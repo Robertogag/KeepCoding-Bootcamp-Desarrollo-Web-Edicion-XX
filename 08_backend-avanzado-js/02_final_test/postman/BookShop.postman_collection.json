@@ -38,8 +38,13 @@
             },
             "url": {
               "raw": "{{baseUrl}}/authentication/signup",
-              "host": ["{{baseUrl}}"],
-              "path": ["authentication", "signup"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "authentication",
+                "signup"
+              ]
             }
           }
         },
@@ -73,8 +78,13 @@
             },
             "url": {
               "raw": "{{baseUrl}}/authentication/signin",
-              "host": ["{{baseUrl}}"],
-              "path": ["authentication", "signin"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "authentication",
+                "signin"
+              ]
             }
           }
         }
@@ -123,8 +133,12 @@
             },
             "url": {
               "raw": "{{baseUrl}}/books",
-              "host": ["{{baseUrl}}"],
-              "path": ["books"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "books"
+              ]
             }
           }
         },
@@ -154,29 +168,13 @@
             },
             "url": {
               "raw": "{{baseUrl}}/books/{{bookId}}",
-              "host": ["{{baseUrl}}"],
-              "path": ["books", "{{bookId}}"]
-            }
-          }
-        },
-        {
-          "name": "Delete book",
-          "request": {
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "{{accessToken}}",
-                  "type": "string"
-                }
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "books",
+                "{{bookId}}"
               ]
-            },
-            "method": "DELETE",
-            "url": {
-              "raw": "{{baseUrl}}/books/{{bookId}}",
-              "host": ["{{baseUrl}}"],
-              "path": ["books", "{{bookId}}"]
             }
           }
         },
@@ -196,8 +194,14 @@
             "method": "POST",
             "url": {
               "raw": "{{baseUrl}}/books/{{bookId}}/buy",
-              "host": ["{{baseUrl}}"],
-              "path": ["books", "{{bookId}}", "buy"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "books",
+                "{{bookId}}",
+                "buy"
+              ]
             },
             "description": "Recuerda: no puedes comprar tu propio libro (403). Haz Signup/Signin con otro email antes de comprar."
           }
@@ -218,8 +222,39 @@
             "method": "GET",
             "url": {
               "raw": "{{baseUrl}}/me/books",
-              "host": ["{{baseUrl}}"],
-              "path": ["me", "books"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "me",
+                "books"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete book",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "url": {
+              "raw": "{{baseUrl}}/books/{{bookId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "books",
+                "{{bookId}}"
+              ]
             }
           }
         }
@@ -234,8 +269,12 @@
             "method": "GET",
             "url": {
               "raw": "{{baseUrl}}/books?page=1&limit=10&search=clean",
-              "host": ["{{baseUrl}}"],
-              "path": ["books"],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "books"
+              ],
               "query": [
                 {
                   "key": "page",
