@@ -1,10 +1,6 @@
 # BookShop API — Final Advanced Backend Project
 
 <p align="center">
-  <img src="00_images/screenshots/maildev-sale-email.png" alt="Sale notification email received in MailDev" width="90%">
-</p>
-
-<p align="center">
   <img src="https://img.shields.io/badge/Express-REST%20API-000000?logo=express&logoColor=white" alt="Express">
   <img src="https://img.shields.io/badge/TypeScript-Strict-3178c6?logo=typescript&logoColor=white" alt="TypeScript">
   <img src="https://img.shields.io/badge/Prisma-PostgreSQL-2D3748?logo=prisma&logoColor=white" alt="Prisma">
