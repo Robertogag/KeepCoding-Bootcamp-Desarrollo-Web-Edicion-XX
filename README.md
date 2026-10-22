@@ -8,7 +8,7 @@
   <img src="https://img.shields.io/badge/Bootcamp-KeepCoding-black?style=for-the-badge" alt="KeepCoding">
   <img src="https://img.shields.io/badge/Focus-Full%20Stack%20Development-blue?style=for-the-badge" alt="Full Stack Development">
   <img src="https://img.shields.io/badge/Background-Data%20%26%20Industrial%20Systems-success?style=for-the-badge" alt="Data and Industrial Systems">
-  <img src="https://img.shields.io/badge/Status-In%20Progress-brightgreen?style=for-the-badge" alt="Status">
+  <img src="https://img.shields.io/badge/Status-Final%20Project%20Delivered-brightgreen?style=for-the-badge" alt="Status">
 </p>
 
 ---
@@ -90,6 +90,12 @@ Each folder represents a module, practice or project developed during the progra
 
 ---
 
+## Final Project
+
+The bootcamp closes with **OEE Live**, a complete SaaS for plants without a MES: machines are read over Modbus TCP, their state is shown live, and Availability, Performance, Quality and OEE are computed per machine, shift and plant, with alerts, downtime classification, production runs and formatted Excel reports. The full write-up (goal, architecture, how to run it, what the bootcamp reinforced) is in [`09_proyecto-final/README.md`](./09_proyecto-final/README.md); the online demo stays up for one week after delivery at https://oee-live-keepcoding.cloud.run.
+
+---
+
 ## Current Focus
 
 This repository will continue growing as new modules and deliverables are completed.
@@ -108,6 +114,7 @@ The goal is not only to store final results, but also to reflect a clear technic
 | `03_html-css_fundamentals/` | HTML5, CSS and SCSS fundamentals module with final landing page project |
 | `07_react-fundamentos/` | React fundamentals module with course material and final CRUD dashboard project |
 | `08_backend-avanzado-js/` | Advanced backend module with Node.js, Express, Prisma and the BookShop API final practice |
+| `09_proyecto-final/` | **Final full-stack project: OEE Live.** Real-time OEE monitoring for injection plants over Modbus TCP: Next.js 16 frontend, FastAPI backend, PostgreSQL, Redis, Modbus simulator and collector, deployed on Google Cloud (VM + Cloud Run). Live demo: https://oee-live-keepcoding.cloud.run |
 
 ---
 

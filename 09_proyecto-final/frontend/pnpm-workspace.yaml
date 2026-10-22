@@ -1,0 +1,10 @@
+nodeLinker: hoisted
+packageImportMethod: copy
+# Scripts de instalación: solo se permiten los necesarios; estos paquetes traen binarios precompilados
+# y el postinstall de msw no hace falta en producción.
+allowBuilds:
+  sharp: false
+  unrs-resolver: false
+  '@parcel/watcher': false
+  '@swc/core': false
+  msw: false

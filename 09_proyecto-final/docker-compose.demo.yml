@@ -1,0 +1,58 @@
+# Public exam demo: combine with docker-compose.prod.yml, using a separate env file.
+# SMTP is captured internally by Mailpit; messages are not delivered externally.
+name: oee-live-demo
+
+x-demo-logging: &demo-logging
+  driver: json-file
+  options:
+    max-size: "10m"
+    max-file: "3"
+
+x-demo-smtp: &demo-smtp
+  SMTP_HOST: mailpit
+  SMTP_PORT: "1025"
+  SMTP_USER: ""
+  SMTP_PASSWORD: ""
+  SMTP_STARTTLS: "false"
+
+services:
+  postgres:
+    logging: *demo-logging
+  redis:
+    logging: *demo-logging
+  migrate:
+    logging: *demo-logging
+    environment: *demo-smtp
+  api:
+    logging: *demo-logging
+    environment: *demo-smtp
+    command:
+      - uvicorn
+      - app.main:app
+      - --host
+      - 0.0.0.0
+      - --port
+      - "8000"
+      - --no-access-log
+      - --log-level
+      - warning
+    depends_on:
+      mailpit:
+        condition: service_started
+  simulator:
+    logging: *demo-logging
+  collector:
+    logging: *demo-logging
+    environment: *demo-smtp
+  frontend:
+    logging: *demo-logging
+  caddy:
+    logging: *demo-logging
+  mailpit:
+    image: axllent/mailpit:v1.30.7
+    restart: unless-stopped
+    logging: *demo-logging
+    environment:
+      MP_MAX_MESSAGES: "500"
+      MP_QUIET: "true"
+      MP_DISABLE_VERSION_CHECK: "true"

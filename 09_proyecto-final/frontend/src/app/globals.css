@@ -1,0 +1,287 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Sala de control: fondo azul-negro con brillos suaves, paneles de vidrio y tres niveles de texto. */
+:root {
+  --bg: #e6ebf2;
+  --bg-glow-1: rgba(37, 99, 235, 0.12);
+  --bg-glow-2: rgba(13, 148, 136, 0.08);
+  --grid: rgba(15, 23, 42, 0.05);
+  --panel: rgba(255, 255, 255, 0.96);
+  --panel-solid: #ffffff;
+  --panel-2: rgba(226, 232, 240, 0.9);
+  --panel-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
+  --line: rgba(71, 85, 105, 0.2);
+  --line-strong: rgba(71, 85, 105, 0.38);
+  --fg: #0f172a;
+  --muted: #475569;
+  --faint: #64748b;
+  --accent: #2563eb;
+  --accent-fg: #ffffff;
+  --accent-text: #1d4ed8;
+  --series-1: #2563eb;
+  --header-from: rgba(255, 255, 255, 0.9);
+  --header-to: rgba(226, 232, 240, 0.9);
+
+  --running: #16a34a;
+  --idle: #d97706;
+  --down: #dc2626;
+  --offline: #64748b;
+  --running-soft: rgba(22, 163, 74, 0.12);
+  --idle-soft: rgba(217, 119, 6, 0.14);
+  --down-soft: rgba(220, 38, 38, 0.12);
+  --offline-soft: rgba(100, 116, 139, 0.12);
+}
+
+.dark {
+  --bg: #070b14;
+  --bg-glow-1: rgba(37, 99, 235, 0.2);
+  --bg-glow-2: rgba(20, 184, 166, 0.1);
+  --grid: rgba(148, 163, 184, 0.045);
+  --panel: rgba(15, 23, 42, 0.93);
+  --panel-solid: #0f172a;
+  --panel-2: rgba(30, 41, 59, 0.96);
+  --panel-shadow: 0 8px 18px rgba(2, 6, 23, 0.32);
+  --line: rgba(148, 163, 184, 0.16);
+  --line-strong: rgba(148, 163, 184, 0.34);
+  --fg: #f8fafc;
+  --muted: #94a3b8;
+  --faint: #64748b;
+  --accent: #3b82f6;
+  --accent-fg: #ffffff;
+  --accent-text: #38bdf8;
+  --series-1: #38bdf8;
+  --header-from: rgba(10, 15, 25, 0.86);
+  --header-to: rgba(12, 24, 44, 0.8);
+
+  --running: #4ade80;
+  --idle: #fbbf24;
+  --down: #f87171;
+  --offline: #94a3b8;
+  --running-soft: rgba(74, 222, 128, 0.14);
+  --idle-soft: rgba(251, 191, 36, 0.14);
+  --down-soft: rgba(248, 113, 113, 0.16);
+  --offline-soft: rgba(148, 163, 184, 0.12);
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-panel: var(--panel);
+  --color-panel-solid: var(--panel-solid);
+  --color-panel-2: var(--panel-2);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-accent: var(--accent);
+  --color-accent-fg: var(--accent-fg);
+  --color-accent-text: var(--accent-text);
+  --color-series-1: var(--series-1);
+
+  --color-running: var(--running);
+  --color-idle: var(--idle);
+  --color-down: var(--down);
+  --color-offline: var(--offline);
+  --color-running-soft: var(--running-soft);
+  --color-idle-soft: var(--idle-soft);
+  --color-down-soft: var(--down-soft);
+  --color-offline-soft: var(--offline-soft);
+
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+  --radius-xl: 14px;
+
+  --font-sans: var(--font-plex-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, 'Cascadia Mono', monospace;
+}
+
+/* Panel de vidrio: borde fino, desenfoque del fondo y sombra profunda. */
+@utility panel {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background-color: var(--panel);
+  box-shadow:
+    var(--panel-shadow),
+    inset 0 0 0 1px rgba(148, 163, 184, 0.06);
+}
+
+/* Barra de cabecera con degradado horizontal, como consola de planta. */
+@utility header-bar {
+  background-image: linear-gradient(90deg, var(--header-from), var(--header-to));
+  border-bottom: 1px solid var(--line-strong);
+}
+
+/* Rótulo de sección en versalitas pesadas. */
+@utility eyebrow {
+  font-size: 11px;
+  line-height: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Cifras de instrumento: monoespaciada, alineada en columnas. */
+@utility numeric {
+  font-family: var(--font-plex-sans), ui-sans-serif, system-ui, sans-serif;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Etiqueta de estado: toma el color del texto para borde y relleno. */
+@utility chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 8px;
+  border-radius: 6px;
+  border: 1px solid color-mix(in srgb, currentColor 45%, transparent);
+  background-color: color-mix(in srgb, currentColor 14%, transparent);
+  font-size: 11px;
+  line-height: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+@utility glow-running {
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--running) 55%, transparent),
+    0 0 26px color-mix(in srgb, var(--running) 24%, transparent);
+}
+
+@utility glow-idle {
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--idle) 55%, transparent),
+    0 0 26px color-mix(in srgb, var(--idle) 24%, transparent);
+}
+
+@utility glow-down {
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--down) 65%, transparent),
+    0 0 30px color-mix(in srgb, var(--down) 34%, transparent);
+  animation: pulse-down 1.6s ease-in-out infinite;
+}
+
+@utility glow-offline {
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--offline) 45%, transparent);
+}
+
+@utility led {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 9999px;
+  background-color: currentColor;
+  box-shadow: 0 0 8px currentColor;
+}
+
+@utility fade-in {
+  animation: fade-in 420ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes pulse-down {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 1px color-mix(in srgb, var(--down) 65%, transparent),
+      0 0 18px color-mix(in srgb, var(--down) 22%, transparent);
+  }
+  50% {
+    box-shadow:
+      0 0 0 1px color-mix(in srgb, var(--down) 90%, transparent),
+      0 0 38px color-mix(in srgb, var(--down) 48%, transparent);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 8px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+html {
+  color-scheme: light;
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-variant-numeric: tabular-nums;
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(1200px 640px at 8% -12%, var(--bg-glow-1), transparent 62%),
+    radial-gradient(900px 520px at 104% 104%, var(--bg-glow-2), transparent 60%),
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size:
+    auto,
+    auto,
+    48px 48px,
+    48px 48px;
+  background-attachment: fixed;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent-text);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glow-down,
+  .fade-in {
+    animation: none;
+  }
+}
+
+/* Nave de inyección al fondo con velo oscuro: la misma composición que un tablero de planta. */
+.dark body {
+  background-image:
+    linear-gradient(rgba(6, 10, 20, 0.84), rgba(6, 10, 20, 0.9)), url('/plant-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+@utility hero-photo {
+  background-image:
+    linear-gradient(
+      90deg,
+      rgba(6, 10, 20, 0.92) 20%,
+      rgba(6, 10, 20, 0.55) 70%,
+      rgba(6, 10, 20, 0.35)
+    ),
+    url('/plant-bg.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+/* Tema claro: la misma nave con un velo claro, para que el fondo tenga textura y no quede plano. */
+html:not(.dark) body {
+  background-image:
+    linear-gradient(rgba(236, 240, 246, 0.9), rgba(236, 240, 246, 0.95)), url('/plant-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}

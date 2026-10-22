@@ -1,0 +1,62 @@
+{
+    email {$ACME_EMAIL}
+    log default {
+        format filter {
+            wrap json
+            fields {
+                request>uri query {
+                    delete token
+                }
+                request>headers>Referer delete
+                request>headers>Authorization delete
+                request>headers>Proxy-Authorization delete
+                request>headers>Cookie delete
+                resp_headers>Set-Cookie delete
+                resp_headers>Location delete
+            }
+        }
+    }
+}
+
+{$DOMAIN} {
+    encode zstd gzip
+
+    # This header selects the gateway route; it is not an authentication boundary.
+    @direct not header X-OEE-Gateway cloud-run
+    redir @direct https://{$PUBLIC_DOMAIN}{uri} 308
+
+    @backend path /api /api/* /ws /ws/*
+    handle @backend {
+        reverse_proxy api:8000 {
+            header_up Host {$PUBLIC_DOMAIN}
+            header_up X-Forwarded-Host {$PUBLIC_DOMAIN}
+            header_up X-Forwarded-Proto https
+        }
+    }
+
+    handle {
+        reverse_proxy frontend:3000 {
+            header_up Host {$PUBLIC_DOMAIN}
+            header_up X-Forwarded-Host {$PUBLIC_DOMAIN}
+            header_up X-Forwarded-Proto https
+        }
+    }
+
+    header X-Content-Type-Options nosniff
+    log {
+        format filter {
+            wrap json
+            fields {
+                request>uri query {
+                    delete token
+                }
+                request>headers>Referer delete
+                request>headers>Authorization delete
+                request>headers>Proxy-Authorization delete
+                request>headers>Cookie delete
+                resp_headers>Set-Cookie delete
+                resp_headers>Location delete
+            }
+        }
+    }
+}

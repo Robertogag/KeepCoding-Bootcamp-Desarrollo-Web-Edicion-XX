@@ -1,0 +1,61 @@
+{
+    auto_https off
+    admin off
+    log default {
+        format filter {
+            wrap json
+            fields {
+                request>uri query {
+                    delete token
+                }
+                request>headers>Referer delete
+                request>headers>Authorization delete
+                request>headers>Proxy-Authorization delete
+                request>headers>Cookie delete
+                resp_headers>Set-Cookie delete
+                resp_headers>Location delete
+            }
+        }
+    }
+}
+
+:{$PORT:8080} {
+    @nonCanonical not host {$PUBLIC_DOMAIN}
+
+    route {
+        header {
+            Strict-Transport-Security "max-age=31536000"
+            Referrer-Policy no-referrer
+            X-Frame-Options SAMEORIGIN
+            Permissions-Policy "camera=(), microphone=(), geolocation=()"
+            X-Content-Type-Options nosniff
+            defer
+        }
+
+        # Keep browser sessions on one origin, including links using run.app aliases.
+        redir @nonCanonical https://{$PUBLIC_DOMAIN}{uri} 308
+
+        reverse_proxy https://{$ORIGIN_HOST} {
+            header_up Host {$ORIGIN_HOST}
+            header_up X-OEE-Gateway cloud-run
+            header_up X-Forwarded-Proto https
+        }
+    }
+
+    log {
+        format filter {
+            wrap json
+            fields {
+                request>uri query {
+                    delete token
+                }
+                request>headers>Referer delete
+                request>headers>Authorization delete
+                request>headers>Proxy-Authorization delete
+                request>headers>Cookie delete
+                resp_headers>Set-Cookie delete
+                resp_headers>Location delete
+            }
+        }
+    }
+}

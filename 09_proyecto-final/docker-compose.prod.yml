@@ -1,0 +1,156 @@
+name: oee-live
+
+x-backend: &backend
+  build: ./backend
+  image: oee-live-backend:production
+  init: true
+  logging:
+    driver: json-file
+    options:
+      max-size: "10m"
+      max-file: "3"
+  environment: &backend-environment
+    ENVIRONMENT: production
+    DATABASE_URL: postgresql+asyncpg://${POSTGRES_USER:-oee}:${POSTGRES_PASSWORD:?Configure POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-oee}
+    REDIS_URL: redis://redis:6379/0
+    JWT_SECRET: ${JWT_SECRET:?Configure JWT_SECRET}
+    FRONTEND_URL: https://${DOMAIN:?Configure DOMAIN}
+    PUBLIC_API_URL: https://${DOMAIN:?Configure DOMAIN}/api/v1
+    UPLOAD_DIR: /data/uploads
+    SMTP_HOST: ${SMTP_HOST:?Configure SMTP_HOST}
+    SMTP_PORT: ${SMTP_PORT:-587}
+    SMTP_USER: ${SMTP_USER:-}
+    SMTP_PASSWORD: ${SMTP_PASSWORD:-}
+    SMTP_FROM: ${SMTP_FROM:?Configure SMTP_FROM}
+    SMTP_STARTTLS: ${SMTP_STARTTLS:-true}
+    ACCESS_TOKEN_MINUTES: 15
+    REFRESH_TOKEN_DAYS: 14
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-oee}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Configure POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB:-oee}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  redis:
+    image: redis:7-alpine
+    command: ["redis-server", "--appendonly", "yes"]
+    restart: unless-stopped
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  migrate:
+    <<: *backend
+    command: ["python", "-m", "alembic", "upgrade", "head"]
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  api:
+    <<: *backend
+    restart: unless-stopped
+    environment:
+      <<: *backend-environment
+      SIMULATOR_CONFIG: /app/config/machines.yaml
+    volumes:
+      - uploads:/data/uploads
+      - ./simulator/machines.yaml:/app/config/machines.yaml:ro
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/v1/health', timeout=3)"
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 15s
+
+  simulator:
+    build: ./simulator
+    init: true
+    restart: unless-stopped
+    environment:
+      SIMULATOR_SEED: ${SIMULATOR_SEED:-42}
+
+  collector:
+    <<: *backend
+    command: ["python", "-m", "app.collector"]
+    restart: unless-stopped
+    stop_grace_period: 30s
+    depends_on:
+      api:
+        condition: service_healthy
+      simulator:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-m", "app.collector.health"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+      start_period: 15s
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        NEXT_PUBLIC_API_URL: https://${DOMAIN:?Configure DOMAIN}/api/v1
+        NEXT_PUBLIC_WS_URL: wss://${DOMAIN:?Configure DOMAIN}/ws
+        NEXT_PUBLIC_SITE_URL: https://${DOMAIN:?Configure DOMAIN}
+        NEXT_PUBLIC_API_MOCKING: "false"
+    init: true
+    restart: unless-stopped
+    environment:
+      API_URL_INTERNAL: http://api:8000/api/v1
+      HOSTNAME: 0.0.0.0
+      PORT: 3000
+    depends_on:
+      api:
+        condition: service_healthy
+
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    environment:
+      DOMAIN: ${DOMAIN:?Configure DOMAIN}
+      ACME_EMAIL: ${ACME_EMAIL:?Configure ACME_EMAIL}
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+    depends_on:
+      api:
+        condition: service_healthy
+      frontend:
+        condition: service_started
+
+volumes:
+  postgres-data:
+  redis-data:
+  uploads:
+  caddy-data:
+  caddy-config:

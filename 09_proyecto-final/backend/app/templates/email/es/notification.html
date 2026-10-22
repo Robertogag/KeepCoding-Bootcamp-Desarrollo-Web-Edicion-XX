@@ -1,0 +1,10 @@
+<!doctype html>
+<html lang="es"><body>
+<p>Hola, {{ user.full_name }}.</p>
+<p>{{ notification.payload.machine_name }}:
+{% if notification.type == 'MACHINE_DOWN' %}la máquina está en paro.
+{% elif notification.type == 'MACHINE_OFFLINE' %}la máquina perdió la conexión.
+{% else %}el OEE del turno está por debajo del umbral configurado.{% endif %}</p>
+<p><a href="{{ detail_url }}">Ver máquina</a></p>
+<p><a href="{{ unfollow_url }}">Dejar de seguir esta máquina</a></p>
+</body></html>

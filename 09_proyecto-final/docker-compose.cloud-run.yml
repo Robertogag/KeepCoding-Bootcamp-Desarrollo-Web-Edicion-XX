@@ -1,0 +1,28 @@
+# Add after prod + demo when Cloud Run provides the public URL.
+# DOMAIN stays the origin's TLS hostname; PUBLIC_DOMAIN is the run.app hostname.
+x-public-environment: &public-environment
+  FRONTEND_URL: https://${PUBLIC_DOMAIN:?Configure PUBLIC_DOMAIN}
+  PUBLIC_API_URL: https://${PUBLIC_DOMAIN:?Configure PUBLIC_DOMAIN}/api/v1
+
+services:
+  migrate:
+    environment: *public-environment
+  api:
+    environment: *public-environment
+  collector:
+    environment: *public-environment
+  frontend:
+    build:
+      args:
+        NEXT_PUBLIC_API_URL: https://${PUBLIC_DOMAIN:?Configure PUBLIC_DOMAIN}/api/v1
+        NEXT_PUBLIC_WS_URL: wss://${PUBLIC_DOMAIN:?Configure PUBLIC_DOMAIN}/ws
+        NEXT_PUBLIC_SITE_URL: https://${PUBLIC_DOMAIN:?Configure PUBLIC_DOMAIN}
+    # Acceso de demostración que muestra la portada; los lee el servidor de Next en cada petición.
+    environment:
+      DEMO_USERNAME: ${DEMO_USERNAME:-demo}
+      DEMO_PASSWORD: ${DEMO_PASSWORD:-}
+  caddy:
+    environment:
+      PUBLIC_DOMAIN: ${PUBLIC_DOMAIN:?Configure PUBLIC_DOMAIN}
+    volumes:
+      - ./Caddyfile.cloud-run-origin:/etc/caddy/Caddyfile:ro

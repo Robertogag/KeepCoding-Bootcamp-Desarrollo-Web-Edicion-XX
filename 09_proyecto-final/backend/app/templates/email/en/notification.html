@@ -1,0 +1,10 @@
+<!doctype html>
+<html lang="en"><body>
+<p>Hello, {{ user.full_name }}.</p>
+<p>{{ notification.payload.machine_name }}:
+{% if notification.type == 'MACHINE_DOWN' %}the machine is down.
+{% elif notification.type == 'MACHINE_OFFLINE' %}the machine lost its connection.
+{% else %}the shift OEE is below the configured threshold.{% endif %}</p>
+<p><a href="{{ detail_url }}">View machine</a></p>
+<p><a href="{{ unfollow_url }}">Unfollow this machine</a></p>
+</body></html>

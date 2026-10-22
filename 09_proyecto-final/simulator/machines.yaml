@@ -1,0 +1,97 @@
+# All addresses, process values and non-time units below are simulator conventions.
+# MES supplies the canonical names, not this register map or physical units.
+map_version: injection-demo-v1
+process_variables:
+  - {code: filling_time_s, name: "DEMO - Tiempo de llenado", unit: s, address: 9, cycle_fraction: 0.08}
+  - {code: dose_time_s, name: "DEMO - Tiempo de dosificacion", unit: s, address: 11, cycle_fraction: 0.18}
+  - {code: min_cushion_position, name: "DEMO - Colchon minimo", unit: mm, address: 13, baseline: 4.5}
+  - {code: vp_switchover_position, name: "DEMO - Posicion de transferencia V/P", unit: mm, address: 15, baseline: 12.0}
+  - {code: peak_injection_pressure, name: "DEMO - Presion pico de inyeccion", unit: bar, address: 17, baseline: 850.0}
+  - {code: cooling_time_s, name: "DEMO - Tiempo de enfriamiento", unit: s, address: 19, cycle_fraction: 0.50}
+  - {code: melt_temperature_c, name: "DEMO - Temperatura de masa", unit: "°C", address: 21, baseline: 225.0}
+  - {code: mold_temperature_c, name: "DEMO - Temperatura de molde", unit: "°C", address: 23, baseline: 45.0}
+  - {code: holding_pressure, name: "DEMO - Presion de sostenimiento", unit: bar, address: 25, baseline: 450.0}
+  - {code: clamp_force, name: "DEMO - Fuerza de cierre", unit: kN, address: 27, baseline: 1800.0}
+  - {code: shot_count, name: "DEMO - Disparos absolutos", unit: shots, address: 29, data_type: uint32}
+  - {code: active_cavities, name: "DEMO - Cavidades activas", unit: count, address: 31, data_type: uint16}
+machines:
+  - unit_id: 1
+    name: Inyectora 01
+    active_cavities: 4
+    ideal_cycle_s: 28.0
+    cycle_jitter: 0.08
+    scrap_rate: 0.02
+    mtbf_min: 45
+    mttr_min: 6
+    micro_stop_prob: 0.03
+    idle_prob: 0.01
+  - unit_id: 2
+    name: Inyectora 02
+    active_cavities: 2
+    ideal_cycle_s: 32.0
+    cycle_jitter: 0.12
+    scrap_rate: 0.04
+    mtbf_min: 30
+    mttr_min: 4
+    micro_stop_prob: 0.04
+    idle_prob: 0.02
+  - unit_id: 3
+    name: Inyectora 03
+    active_cavities: 1
+    ideal_cycle_s: 12.0
+    cycle_jitter: 0.06
+    scrap_rate: 0.01
+    mtbf_min: 60
+    mttr_min: 5
+    micro_stop_prob: 0.02
+    idle_prob: 0.01
+  - unit_id: 4
+    name: Inyectora 04
+    active_cavities: 4
+    ideal_cycle_s: 15.0
+    cycle_jitter: 0.15
+    scrap_rate: 0.05
+    mtbf_min: 25
+    mttr_min: 8
+    micro_stop_prob: 0.06
+    idle_prob: 0.03
+  - unit_id: 5
+    name: Inyectora 05
+    active_cavities: 2
+    ideal_cycle_s: 8.0
+    cycle_jitter: 0.10
+    scrap_rate: 0.015
+    mtbf_min: 50
+    mttr_min: 3
+    micro_stop_prob: 0.04
+    idle_prob: 0.02
+  - unit_id: 6
+    name: Inyectora 06
+    active_cavities: 1
+    ideal_cycle_s: 10.0
+    cycle_jitter: 0.18
+    scrap_rate: 0.03
+    mtbf_min: 35
+    mttr_min: 5
+    micro_stop_prob: 0.05
+    idle_prob: 0.025
+  - unit_id: 7
+    name: Inyectora 07
+    active_cavities: 4
+    ideal_cycle_s: 5.0
+    cycle_jitter: 0.05
+    scrap_rate: 0.005
+    mtbf_min: 75
+    mttr_min: 2
+    micro_stop_prob: 0.02
+    idle_prob: 0.015
+  - unit_id: 8
+    name: Inyectora 08
+    active_cavities: 2
+    ideal_cycle_s: 45.0
+    cycle_jitter: 0.07
+    scrap_rate: 0.025
+    mtbf_min: 40
+    mttr_min: 7
+    micro_stop_prob: 0.03
+    idle_prob: 0.02

@@ -1,0 +1,40 @@
+{
+    email {$ACME_EMAIL}
+    log default {
+        format filter {
+            wrap json
+            fields {
+                request>uri query {
+                    delete token
+                }
+                request>headers>Referer delete
+            }
+        }
+    }
+}
+
+{$DOMAIN} {
+    encode zstd gzip
+
+    @backend path /api /api/* /ws /ws/*
+    handle @backend {
+        reverse_proxy api:8000
+    }
+
+    handle {
+        reverse_proxy frontend:3000
+    }
+
+    header X-Content-Type-Options nosniff
+    log {
+        format filter {
+            wrap json
+            fields {
+                request>uri query {
+                    delete token
+                }
+                request>headers>Referer delete
+            }
+        }
+    }
+}
