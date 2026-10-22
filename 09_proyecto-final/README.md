@@ -257,6 +257,185 @@ Compose, con una capa extra de archivos para la demo y para la entrada por Cloud
 
 ---
 
+### Modelo de datos (entidad–relación)
+
+Treinta y una tablas en PostgreSQL, agrupadas por lo que representan. Solo las entidades
+centrales muestran sus columnas; el resto aparece con sus relaciones.
+
+```mermaid
+erDiagram
+  %% Cuentas y acceso
+  users ||--o{ plant_members : "pertenece a"
+  plants ||--o{ plant_members : "tiene personal"
+  users ||--o{ refresh_tokens : "sesiones"
+  users ||--o{ password_reset_tokens : "recuperaciones"
+
+  %% Planta y máquinas
+  plants ||--o{ shifts : "turnos"
+  plants ||--o{ production_lines : "líneas"
+  plants ||--o{ machines : "máquinas"
+  production_lines |o--o{ machines : "agrupa"
+  machines ||--o| machine_board_positions : "posición en el plano"
+  machines ||--o{ machine_variables : "tags Modbus"
+
+  %% Captura del colector
+  machines ||--o{ production_minutes : "minutos"
+  machines ||--o{ production_samples : "muestras"
+  machines ||--|| machine_checkpoints : "contadores absolutos"
+  machines ||--o{ machine_events : "estados y paros"
+  machines ||--o{ machine_telemetry : "telemetría"
+  downtime_reasons |o--o{ machine_events : "motivo"
+  users |o--o{ machine_events : "clasificó"
+
+  %% Inyección: catálogos, órdenes y corridas
+  plants ||--o{ products : "catálogo"
+  plants ||--o{ molds : "catálogo"
+  plants ||--o{ resins : "catálogo"
+  plants ||--o{ employees : "personal de piso"
+  users |o--o| employees : "cuenta opcional"
+  products ||--o{ injection_recipes : "receta"
+  molds ||--o{ injection_recipes : "receta"
+  resins ||--o{ injection_recipes : "receta"
+  resins ||--o{ resin_lots : "lotes"
+  injection_recipes ||--o{ production_orders : "órdenes"
+  production_orders ||--o{ production_runs : "corridas"
+  machines ||--o{ production_runs : "corre en"
+  molds ||--o{ production_runs : "molde montado"
+  production_runs |o--o{ machine_telemetry : "contexto de la muestra"
+  production_runs ||--o{ run_materials : "materiales"
+  resin_lots ||--o{ run_materials : "lote consumido"
+  production_runs ||--o{ run_employees : "personal asignado"
+  employees ||--o{ run_employees : "asignación"
+  production_lines ||--o{ line_downtimes : "paros de línea"
+  downtime_reasons |o--o{ line_downtimes : "motivo"
+  line_downtimes ||--o{ line_downtime_machines : "afecta a"
+  machines ||--o{ line_downtime_machines : "afectada"
+
+  %% Alertas, notificaciones y seguimiento
+  plants ||--o{ alert_rules : "reglas"
+  machines |o--o{ alert_rules : "regla por máquina"
+  users ||--o{ notifications : "recibe"
+  users ||--o{ watchlist : "sigue"
+  machines ||--o{ watchlist : "seguida por"
+
+  users {
+    int id PK
+    string username
+    string email
+    string full_name
+    string password_hash
+    string language
+  }
+  plants {
+    int id PK
+    string slug
+    string name
+    string timezone
+    bool is_public
+  }
+  plant_members {
+    int plant_id PK, FK
+    int user_id PK, FK
+    string role
+  }
+  shifts {
+    int id PK
+    int plant_id FK
+    string name
+    time start_time
+    time end_time
+    string days_of_week
+  }
+  machines {
+    int id PK
+    int plant_id FK
+    int line_id FK
+    string name
+    string host
+    int port
+    int unit_id
+    float ideal_cycle_s
+    bool is_active
+  }
+  machine_variables {
+    int id PK
+    int machine_id FK
+    string code
+    int address
+    string data_type
+    float scale
+    float offset
+  }
+  production_minutes {
+    int machine_id PK, FK
+    datetime bucket_start PK
+    int good
+    int reject
+    float run_s
+    float idle_s
+    float down_s
+    float offline_s
+  }
+  machine_events {
+    int id PK
+    int machine_id FK
+    string state
+    string reason_code FK
+    string comment
+    int classified_by FK
+    datetime started_at
+    datetime ended_at
+  }
+  machine_telemetry {
+    int machine_id PK, FK
+    datetime sampled_at PK
+    int run_id FK
+    json values
+  }
+  injection_recipes {
+    int id PK
+    int product_id FK
+    int mold_id FK
+    int resin_id FK
+    float ideal_cycle_s
+    int active_cavities
+  }
+  production_runs {
+    int id PK
+    int order_id FK
+    int machine_id FK
+    int mold_id FK
+    json context
+    int active_cavities
+    float ideal_cycle_s
+    datetime started_at
+    datetime ended_at
+  }
+  alert_rules {
+    int id PK
+    int plant_id FK
+    int machine_id FK
+    string type
+    float threshold
+    int duration_s
+    bool is_active
+  }
+  notifications {
+    int id PK
+    int user_id FK
+    string type
+    json payload
+    datetime created_at
+    datetime read_at
+  }
+```
+
+Claves de lectura: el **colector** escribe en `production_minutes`, `production_samples`,
+`machine_checkpoints`, `machine_events` y `machine_telemetry`; el **OEE** se calcula a partir
+de los minutos, los turnos de la planta y el estándar de la corrida vigente (`production_runs`
+congela cavidades y ciclo ideal); las **alertas** nacen de `alert_rules` y terminan en
+`notifications` para cada usuario que sigue la máquina o pertenece a la planta.
+
 ### Tecnologías utilizadas
 
 | Capa | Lenguaje | Frameworks y librerías | Herramientas |
