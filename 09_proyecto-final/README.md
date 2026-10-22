@@ -42,172 +42,7 @@ y producción continua: todo lo que se ve se está escribiendo en la base de dat
 
 ---
 
-## 2. Para los profesores: cómo entrar y qué mirar
-
-### Acceso
-
-| Qué | Dónde |
-|---|---|
-| Aplicación | https://oee-live-keepcoding.cloud.run |
-| Usuario de consulta (solo lectura) | usuario `demo` · contraseña `Demo1234!` (también aparece en la portada) |
-| Tablero público sin cuenta | https://oee-live-keepcoding.cloud.run/es/plants/planta-demo-slp |
-| Idiomas | selector es / en en la cabecera |
-| Documentación del API | `https://oee-live-keepcoding.cloud.run/api/v1/docs` |
-
-La cuenta `demo` es **operador**: ve tableros, históricos, paros y datos, recibe notificaciones y
-sigue máquinas, pero no cambia la configuración. Las cuentas de propietario y supervisor existen y se
-usan en el recorrido de pruebas; si se necesita una para la evaluación, se entrega aparte.
-
-La demo en línea permanece **una semana** después de la entrega. Si ya no responde, el proyecto se
-levanta completo en localhost con Docker en unos minutos (sección 7).
-
-### Recorrido sugerido (5 minutos)
-
-1. **Portada**: acceso, instrucciones y guía de uso en cuatro pasos.
-2. **Tablero** de la planta: plano de piso con las ocho máquinas, totales por estado y OEE del día.
-   Botón *Tarjetas* para la vista clásica y *Pantalla completa* para la pantalla de piso.
-3. **Máquina** (clic en cualquiera): línea de tiempo de 8 h con tooltip (motivo del paro y quién lo
-   clasificó), OEE de hoy, contadores del equipo (disparos, piezas, último ciclo), corrida vigente
-   (producto, molde, resina, cavidades), variables de proceso en vivo, tendencia y eventos paginados.
-4. **Paros**: fallas e inactividad de todas las máquinas con motivo, comentario y quién clasificó,
-   más los paros de línea abiertos y su histórico.
-5. **Datos**: rango, máquinas y vista (por máquina, por día, día × máquina). *Descargar Excel*
-   genera un libro con portada, indicadores, tablas con semáforo y hoja de cálculo explicada.
-6. **Campana** de la cabecera: las notificaciones reales (OEE bajo umbral, falla prolongada) se leen
-   ahí mismo y llevan a la máquina. **Seguimiento**: máquinas favoritas con alertas.
-7. **Configuración** (propietario o supervisor): catálogos de inyección, turnos, personal, reglas de
-   alerta y ajustes de la planta.
-
-### Limitaciones conocidas
-
-- El correo de la demo se captura en un buzón interno (Mailpit); no sale a direcciones reales.
-  La pantalla de recuperación de contraseña lo avisa.
-- La entrada por Cloud Run arranca en frío si lleva un rato sin visitas: la primera petición puede
-  tardar unos segundos.
-- El endpoint CSV del servidor (`/reports/oee.csv`) recalcula cada máquina y día y tarda decenas
-  de segundos; la pantalla de Datos ya no depende de él y genera el CSV en el navegador con las
-  mismas columnas.
-
----
-
-## 3. Recorrido con imágenes reales
-
-Capturas tomadas de la demo en línea con la cuenta de consulta. Cada imagen corresponde a un
-módulo; debajo se explica qué se observa y de dónde sale el dato.
-
-### Portada y acceso
-
-![Portada: acceso, cuenta de demo y guía de uso](docs/images/01-portada.png)
-
-La puerta de entrada. A la izquierda el formulario de acceso con la cuenta de demostración al
-pie; a la derecha, los cuatro pasos para seguir una planta y el enlace al tablero público. El
-fondo es una nave de inyección real.
-
-### Tablero público (sin cuenta)
-
-![Tablero público con las ocho máquinas en vivo](docs/images/02-tablero-publico.png)
-
-Lo que ve cualquiera con el enlace: OEE de la planta hoy con sus tres factores, cuántas máquinas
-hay en cada estado y una tarjeta por máquina con estado, tiempo en ese estado, OEE, A/P/Q y
-contadores. Se actualiza por WebSocket; la página se renderiza en servidor para SEO.
-
-### Mis plantas
-
-![Mis plantas con la guía de uso](docs/images/03-mis-plantas.png)
-
-Las plantas a las que pertenece la cuenta, con el puesto en cada una y su OEE del día. La guía
-de uso se repite aquí para quien entra por primera vez.
-
-### Tablero de planta: plano de piso
-
-![Plano de piso: una ficha por máquina agrupada por línea](docs/images/04-tablero-plano.png)
-
-La pantalla principal. Arriba, el conteo de máquinas por estado y el OEE de la planta con sus
-tres factores; si hay paros de línea activos aparece una franja roja. Después, una ficha por
-máquina agrupada por línea de producción: barra de estado (verde en marcha, ámbar inactiva, roja
-falla, gris sin conexión), silueta de la inyectora teñida con ese estado, nombre y modelo, OEE
-del día en grande con el semáforo, barras de disponibilidad, rendimiento y calidad, y la corrida
-vigente (producto · molde · cavidades activas/nominales). Al pie, la franja de la práctica con el
-reloj de la planta y cuántas máquinas tienen orden abierta.
-
-### Tablero de planta: tarjetas
-
-![Vista de tarjetas](docs/images/05-tablero-tarjetas.png)
-
-La misma información en tarjetas con anillo de OEE, pensada para pantallas de piso.
-
-### Detalle de máquina
-
-![Detalle de máquina: línea de tiempo, OEE, contadores, corrida, telemetría](docs/images/06-maquina-detalle.png)
-
-De arriba abajo: estado actual y acciones (seguir, histórico); línea de tiempo de las últimas
-8 horas con un segmento por estado (al pasar el cursor muestra motivo, comentario y quién
-clasificó el paro; con permisos, clic para clasificar); OEE de hoy con A, P y Q; contadores del
-equipo (disparos, piezas buenas, rechazos, último ciclo real por disparo y estándar base por
-pieza); la corrida vigente con producto, molde, resina, cavidades, ciclo por disparo e ideal por
-pieza; variables de proceso leídas por Modbus con su calidad de dato y la tendencia del ciclo; la
-tendencia de OEE por hora, turno o día, y la tabla de eventos paginada.
-
-### Paros
-
-![Paros de máquina y de línea](docs/images/07-paros.png)
-
-Fallas (con código de alarma del equipo) e inactividad (sin ciclar) de todas las máquinas en el
-rango elegido, con motivo, comentario y quién lo clasificó; el botón *Clasificar* abre el diálogo
-con el catálogo de motivos. Debajo, los paros de línea abiertos manualmente y su histórico. Ambos
-tipos restan disponibilidad en el OEE.
-
-### Datos
-
-![Consulta de datos por máquina](docs/images/08-datos.png)
-![Consulta de datos día × máquina](docs/images/09-datos-matriz.png)
-
-Rango con atajos (hoy, 7 días, 30 días), selección de máquinas y tres vistas: por máquina, por
-día y día × máquina. El resumen del rango, la tabla con semáforo y la gráfica salen de los mismos
-datos que el CSV y el Excel. El Excel trae portada, indicadores, tablas con semáforo y una hoja
-que explica el cálculo.
-
-### Producción
-
-![Órdenes y corridas de inyección](docs/images/10-produccion.png)
-
-Órdenes de producción y corridas por máquina: al abrir una corrida se congelan producto, molde,
-resina y cavidades, y desde ahí sale el estándar por pieza que usa el OEE. La trazabilidad muestra
-los lotes de resina consumidos y el personal asignado.
-
-### Configuración
-
-![Catálogos de inyección](docs/images/11-configuracion-catalogos.png)
-
-Todo lo que se configura una vez: líneas, productos, moldes, resinas, recetas y lotes; turnos;
-personal y puestos; reglas de alerta; ajustes de la planta. Solo el propietario o un supervisor
-editan; el operador consulta.
-
-### Notificaciones y seguimiento
-
-![Campana con las notificaciones recientes](docs/images/12-notificaciones.png)
-
-Las reglas de alerta (máquina con falla más de N segundos, sin conexión, OEE bajo el umbral)
-generan notificaciones reales que llegan por WebSocket y se leen desde la campana sin cambiar de
-pantalla; por correo si la persona no está conectada. *Seguimiento* lista las máquinas favoritas.
-
-### Histórico de telemetría
-
-![Histórico de variables de proceso](docs/images/13-historico-telemetria.png)
-
-Variables de proceso por rango (1 h, 8 h, 24 h, 7 días o fechas), con promedio, mínimo y máximo
-por intervalo, calidad del dato y la corrida a la que pertenece cada muestra.
-
-### Móvil
-
-![Tablero público en un teléfono](docs/images/14-movil-tablero-publico.png)
-
-Toda la aplicación es responsive; en el teléfono la zona privada usa una barra de navegación
-inferior.
-
----
-
-## 4. Arquitectura general
+## 2. Arquitectura general
 
 ```mermaid
 flowchart LR
@@ -439,7 +274,7 @@ congela cavidades y ciclo ideal); las **alertas** nacen de `alert_rules` y termi
 | Infraestructura | Bash, PowerShell, YAML | Docker, Docker Compose, Caddy 2, Google Cloud (Compute Engine, Cloud Run, Artifact Registry, IAP) | gcloud, scripts de aprovisionamiento, empaquetado y respaldo |
 | Contrato y documentación | Markdown, OpenAPI | Especificación escrita y documentación OpenAPI generada por el API | Git y GitHub |
 
-## 5. Arquitectura por partes
+## 3. Arquitectura por partes
 
 ### 4.1 Servidor e infraestructura
 
@@ -515,6 +350,171 @@ probar el sistema completo sin una planta real y es lo que alimenta la demo.
   accesible (foco visible, diálogos nativos, nombres accesibles, navegación por teclado).
 
 Detalle en [frontend/README.md](frontend/README.md).
+
+---
+
+## 4. Para los profesores: cómo entrar y qué mirar
+
+### Acceso
+
+| Qué | Dónde |
+|---|---|
+| Aplicación | https://oee-live-keepcoding.cloud.run |
+| Usuario de consulta (solo lectura) | usuario `demo` · contraseña `Demo1234!` (también aparece en la portada) |
+| Tablero público sin cuenta | https://oee-live-keepcoding.cloud.run/es/plants/planta-demo-slp |
+| Idiomas | selector es / en en la cabecera |
+| Documentación del API | `https://oee-live-keepcoding.cloud.run/api/v1/docs` |
+
+La cuenta `demo` es **operador**: ve tableros, históricos, paros y datos, recibe notificaciones y
+sigue máquinas, pero no cambia la configuración. Las cuentas de propietario y supervisor existen y se
+usan en el recorrido de pruebas; si se necesita una para la evaluación, se entrega aparte.
+
+La demo en línea permanece **una semana** después de la entrega. Si ya no responde, el proyecto se
+levanta completo en localhost con Docker en unos minutos (sección 7).
+
+### Recorrido sugerido (5 minutos)
+
+1. **Portada**: acceso, instrucciones y guía de uso en cuatro pasos.
+2. **Tablero** de la planta: plano de piso con las ocho máquinas, totales por estado y OEE del día.
+   Botón *Tarjetas* para la vista clásica y *Pantalla completa* para la pantalla de piso.
+3. **Máquina** (clic en cualquiera): línea de tiempo de 8 h con tooltip (motivo del paro y quién lo
+   clasificó), OEE de hoy, contadores del equipo (disparos, piezas, último ciclo), corrida vigente
+   (producto, molde, resina, cavidades), variables de proceso en vivo, tendencia y eventos paginados.
+4. **Paros**: fallas e inactividad de todas las máquinas con motivo, comentario y quién clasificó,
+   más los paros de línea abiertos y su histórico.
+5. **Datos**: rango, máquinas y vista (por máquina, por día, día × máquina). *Descargar Excel*
+   genera un libro con portada, indicadores, tablas con semáforo y hoja de cálculo explicada.
+6. **Campana** de la cabecera: las notificaciones reales (OEE bajo umbral, falla prolongada) se leen
+   ahí mismo y llevan a la máquina. **Seguimiento**: máquinas favoritas con alertas.
+7. **Configuración** (propietario o supervisor): catálogos de inyección, turnos, personal, reglas de
+   alerta y ajustes de la planta.
+
+### Limitaciones conocidas
+
+- El correo de la demo se captura en un buzón interno (Mailpit); no sale a direcciones reales.
+  La pantalla de recuperación de contraseña lo avisa.
+- La entrada por Cloud Run arranca en frío si lleva un rato sin visitas: la primera petición puede
+  tardar unos segundos.
+- El endpoint CSV del servidor (`/reports/oee.csv`) recalcula cada máquina y día y tarda decenas
+  de segundos; la pantalla de Datos ya no depende de él y genera el CSV en el navegador con las
+  mismas columnas.
+
+---
+
+## 5. Recorrido con imágenes reales
+
+Capturas tomadas de la demo en línea con la cuenta de consulta. Cada imagen corresponde a un
+módulo; debajo se explica qué se observa y de dónde sale el dato.
+
+### Portada y acceso
+
+![Portada: acceso, cuenta de demo y guía de uso](docs/images/01-portada.png)
+
+La puerta de entrada. A la izquierda el formulario de acceso con la cuenta de demostración al
+pie; a la derecha, los cuatro pasos para seguir una planta y el enlace al tablero público. El
+fondo es una nave de inyección real.
+
+### Tablero público (sin cuenta)
+
+![Tablero público con las ocho máquinas en vivo](docs/images/02-tablero-publico.png)
+
+Lo que ve cualquiera con el enlace: OEE de la planta hoy con sus tres factores, cuántas máquinas
+hay en cada estado y una tarjeta por máquina con estado, tiempo en ese estado, OEE, A/P/Q y
+contadores. Se actualiza por WebSocket; la página se renderiza en servidor para SEO.
+
+### Mis plantas
+
+![Mis plantas con la guía de uso](docs/images/03-mis-plantas.png)
+
+Las plantas a las que pertenece la cuenta, con el puesto en cada una y su OEE del día. La guía
+de uso se repite aquí para quien entra por primera vez.
+
+### Tablero de planta: plano de piso
+
+![Plano de piso: una ficha por máquina agrupada por línea](docs/images/04-tablero-plano.png)
+
+La pantalla principal. Arriba, el conteo de máquinas por estado y el OEE de la planta con sus
+tres factores; si hay paros de línea activos aparece una franja roja. Después, una ficha por
+máquina agrupada por línea de producción: barra de estado (verde en marcha, ámbar inactiva, roja
+falla, gris sin conexión), silueta de la inyectora teñida con ese estado, nombre y modelo, OEE
+del día en grande con el semáforo, barras de disponibilidad, rendimiento y calidad, y la corrida
+vigente (producto · molde · cavidades activas/nominales). Al pie, la franja de la práctica con el
+reloj de la planta y cuántas máquinas tienen orden abierta.
+
+### Tablero de planta: tarjetas
+
+![Vista de tarjetas](docs/images/05-tablero-tarjetas.png)
+
+La misma información en tarjetas con anillo de OEE, pensada para pantallas de piso.
+
+### Detalle de máquina
+
+![Detalle de máquina: línea de tiempo, OEE, contadores, corrida, telemetría](docs/images/06-maquina-detalle.png)
+
+De arriba abajo: estado actual y acciones (seguir, histórico); línea de tiempo de las últimas
+8 horas con un segmento por estado (al pasar el cursor muestra motivo, comentario y quién
+clasificó el paro; con permisos, clic para clasificar); OEE de hoy con A, P y Q; contadores del
+equipo (disparos, piezas buenas, rechazos, último ciclo real por disparo y estándar base por
+pieza); la corrida vigente con producto, molde, resina, cavidades, ciclo por disparo e ideal por
+pieza; variables de proceso leídas por Modbus con su calidad de dato y la tendencia del ciclo; la
+tendencia de OEE por hora, turno o día, y la tabla de eventos paginada.
+
+### Paros
+
+![Paros de máquina y de línea](docs/images/07-paros.png)
+
+Fallas (con código de alarma del equipo) e inactividad (sin ciclar) de todas las máquinas en el
+rango elegido, con motivo, comentario y quién lo clasificó; el botón *Clasificar* abre el diálogo
+con el catálogo de motivos. Debajo, los paros de línea abiertos manualmente y su histórico. Ambos
+tipos restan disponibilidad en el OEE.
+
+### Datos
+
+![Consulta de datos por máquina](docs/images/08-datos.png)
+![Consulta de datos día × máquina](docs/images/09-datos-matriz.png)
+
+Rango con atajos (hoy, 7 días, 30 días), selección de máquinas y tres vistas: por máquina, por
+día y día × máquina. El resumen del rango, la tabla con semáforo y la gráfica salen de los mismos
+datos que el CSV y el Excel. El Excel trae portada, indicadores, tablas con semáforo y una hoja
+que explica el cálculo.
+
+### Producción
+
+![Órdenes y corridas de inyección](docs/images/10-produccion.png)
+
+Órdenes de producción y corridas por máquina: al abrir una corrida se congelan producto, molde,
+resina y cavidades, y desde ahí sale el estándar por pieza que usa el OEE. La trazabilidad muestra
+los lotes de resina consumidos y el personal asignado.
+
+### Configuración
+
+![Catálogos de inyección](docs/images/11-configuracion-catalogos.png)
+
+Todo lo que se configura una vez: líneas, productos, moldes, resinas, recetas y lotes; turnos;
+personal y puestos; reglas de alerta; ajustes de la planta. Solo el propietario o un supervisor
+editan; el operador consulta.
+
+### Notificaciones y seguimiento
+
+![Campana con las notificaciones recientes](docs/images/12-notificaciones.png)
+
+Las reglas de alerta (máquina con falla más de N segundos, sin conexión, OEE bajo el umbral)
+generan notificaciones reales que llegan por WebSocket y se leen desde la campana sin cambiar de
+pantalla; por correo si la persona no está conectada. *Seguimiento* lista las máquinas favoritas.
+
+### Histórico de telemetría
+
+![Histórico de variables de proceso](docs/images/13-historico-telemetria.png)
+
+Variables de proceso por rango (1 h, 8 h, 24 h, 7 días o fechas), con promedio, mínimo y máximo
+por intervalo, calidad del dato y la corrida a la que pertenece cada muestra.
+
+### Móvil
+
+![Tablero público en un teléfono](docs/images/14-movil-tablero-publico.png)
+
+Toda la aplicación es responsive; en el teléfono la zona privada usa una barra de navegación
+inferior.
 
 ---
 
