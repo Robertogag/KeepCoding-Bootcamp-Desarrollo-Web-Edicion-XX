@@ -38,6 +38,7 @@ type LabelKey =
   | 'run'
   | 'planned'
   | 'ideal'
+  | 'downtime'
   | 'total'
   | 'unknown'
   | 'kpis'
@@ -71,6 +72,7 @@ const TEXT: Record<Lang, Labels> = {
     run: 'En marcha (h:mm)',
     planned: 'Planificado (h:mm)',
     ideal: 'Tiempo ideal (h:mm)',
+    downtime: 'Tiempo muerto (h:mm)',
     total: 'Total',
     unknown: 'sin dato',
     kpis: 'Indicadores del rango',
@@ -102,6 +104,7 @@ const TEXT: Record<Lang, Labels> = {
     run: 'Running (h:mm)',
     planned: 'Planned (h:mm)',
     ideal: 'Ideal time (h:mm)',
+    downtime: 'Downtime (h:mm)',
     total: 'Total',
     unknown: 'no data',
     kpis: 'Range indicators',
@@ -300,6 +303,7 @@ function metricsRow(
   durationCell(row.getCell(8), totals.run_s, unknown, strong);
   durationCell(row.getCell(9), totals.planned_s, unknown, strong);
   durationCell(row.getCell(10), totals.ideal_s ?? null, unknown, strong);
+  durationCell(row.getCell(11), Math.max(0, totals.planned_s - totals.run_s), unknown, strong);
   return row;
 }
 
@@ -315,6 +319,7 @@ function metricColumns(T: Labels, first: string): string[] {
     T.run,
     T.planned,
     T.ideal,
+    T.downtime,
   ];
 }
 
@@ -378,12 +383,12 @@ export async function buildOeeWorkbook(input: ExcelReportInput): Promise<Blob> {
   const perMachine = aggregateByMachine(input.rows, input.idealCycles);
   const matrix = aggregateMatrix(input.rows, input.idealCycles);
   const machinesLabel = input.allMachines ? T.all : input.machines.join(', ');
-  const widths = [26, 12, 15, 15, 12, 14, 12, 16, 17, 17];
+  const widths = [26, 12, 15, 15, 12, 14, 12, 16, 17, 17, 18];
 
   // Resumen: banda de título, ficha, indicadores y tabla por máquina.
   const summary = workbook.addWorksheet(T.summary, { views: [{ showGridLines: false }] });
   setup(summary, COLOR.band, widths);
-  summary.mergeCells('A1:J2');
+  summary.mergeCells('A1:K2');
   const title = summary.getCell('A1');
   title.value = `${T.title} · ${T.subtitle}`;
   title.fill = solid(COLOR.band);
@@ -391,7 +396,7 @@ export async function buildOeeWorkbook(input: ExcelReportInput): Promise<Blob> {
   title.alignment = { vertical: 'middle', horizontal: 'left', indent: 1 };
   summary.getRow(1).height = 24;
   summary.getRow(2).height = 24;
-  summary.mergeCells('A3:J3');
+  summary.mergeCells('A3:K3');
   const plantLine = summary.getCell('A3');
   plantLine.value = `${input.plantName}  ·  ${input.fromDay} – ${input.toDay}`;
   plantLine.fill = solid(COLOR.accent);
@@ -414,7 +419,7 @@ export async function buildOeeWorkbook(input: ExcelReportInput): Promise<Blob> {
     const valueCell = summary.getCell(line, 2);
     valueCell.value = value;
     valueCell.font = font({ size: 10 });
-    summary.mergeCells(line, 2, line, 10);
+    summary.mergeCells(line, 2, line, 11);
     line += 1;
   }
 
@@ -440,7 +445,7 @@ export async function buildOeeWorkbook(input: ExcelReportInput): Promise<Blob> {
   summary.getRow(line).height = 16;
   summary.getRow(line + 1).height = 34;
   line += 3;
-  summary.mergeCells(line, 1, line, 10);
+  summary.mergeCells(line, 1, line, 11);
   const legend = summary.getCell(line, 1);
   legend.value = T.legend;
   legend.font = font({ italic: true, size: 9, color: COLOR.muted });
@@ -449,9 +454,9 @@ export async function buildOeeWorkbook(input: ExcelReportInput): Promise<Blob> {
   line += 1;
   headerRow(summary, metricColumns(T, T.machine));
   perMachine.forEach((row, index) =>
-    zebra(metricsRow(summary, row.machine, row, unknown), index, 10),
+    zebra(metricsRow(summary, row.machine, row, unknown), index, 11),
   );
-  totalRowStyle(metricsRow(summary, T.total, range, unknown, true), 10);
+  totalRowStyle(metricsRow(summary, T.total, range, unknown, true), 11);
 
   // Por día
   const byDay = workbook.addWorksheet(T.byDay, {
@@ -468,11 +473,11 @@ export async function buildOeeWorkbook(input: ExcelReportInput): Promise<Blob> {
         unknown,
       ),
       index,
-      10,
+      11,
     ),
   );
-  totalRowStyle(metricsRow(byDay, T.total, range, unknown, true), 10);
-  byDay.autoFilter = { from: 'A1', to: `J${days.length + 1}` };
+  totalRowStyle(metricsRow(byDay, T.total, range, unknown, true), 11);
+  byDay.autoFilter = { from: 'A1', to: `K${days.length + 1}` };
 
   // Día x máquina
   const grid = workbook.addWorksheet(T.matrix, {
@@ -525,9 +530,10 @@ export async function buildOeeWorkbook(input: ExcelReportInput): Promise<Blob> {
     durationCell(cells.getCell(9), row.run_s, unknown);
     durationCell(cells.getCell(10), row.planned_s, unknown);
     durationCell(cells.getCell(11), row.ideal_seconds ?? null, unknown);
-    zebra(cells, index, 11);
+    durationCell(cells.getCell(12), Math.max(0, row.planned_s - row.run_s), unknown);
+    zebra(cells, index, 12);
   });
-  detail.autoFilter = { from: 'A1', to: `K${sorted.length + 1}` };
+  detail.autoFilter = { from: 'A1', to: `L${sorted.length + 1}` };
 
   // Cálculo
   const calc = workbook.addWorksheet(T.calc, { views: [{ showGridLines: false }] });

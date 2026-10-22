@@ -35,6 +35,7 @@ import {
   aggregateByDay,
   aggregateByMachine,
   aggregateMatrix,
+  downtimeSeconds,
   matrixKey,
   type ReportLike,
 } from '@/lib/reports';
@@ -91,6 +92,9 @@ function MetricCells({ totals }: { totals: ReportLike }) {
       <td className="numeric hidden px-3 py-2 text-right md:table-cell">
         {formatDuration(totals.planned_s)}
       </td>
+      <td className="numeric hidden px-3 py-2 text-right text-down md:table-cell">
+        {formatDuration(downtimeSeconds(totals))}
+      </td>
     </>
   );
 }
@@ -98,6 +102,7 @@ function MetricCells({ totals }: { totals: ReportLike }) {
 function MetricHeaders() {
   const to = useTranslations('oee');
   const tc = useTranslations('chart');
+  const t = useTranslations('reports');
   const head = 'px-3 py-2 text-right font-medium';
   return (
     <>
@@ -115,6 +120,7 @@ function MetricHeaders() {
       <th className={head}>{tc('reject')}</th>
       <th className={cn(head, 'hidden md:table-cell')}>{tc('run')}</th>
       <th className={cn(head, 'hidden md:table-cell')}>{tc('planned')}</th>
+      <th className={cn(head, 'hidden md:table-cell')}>{t('downtime')}</th>
     </>
   );
 }
@@ -403,8 +409,20 @@ export function ReportsPanel() {
                     · {tc('run')}{' '}
                     <span className="font-bold text-fg">{formatDuration(range.run_s)}</span> ·{' '}
                     {tc('planned')}{' '}
-                    <span className="font-bold text-fg">{formatDuration(range.planned_s)}</span> (
-                    {t('machineHours')})
+                    <span className="font-bold text-fg">{formatDuration(range.planned_s)}</span> ·{' '}
+                    {t('downtime')}{' '}
+                    <span className="font-bold text-down">
+                      {formatDuration(downtimeSeconds(range))}
+                    </span>{' '}
+                    <span className="text-down">
+                      (
+                      {formatPercent(
+                        range.planned_s > 0 ? downtimeSeconds(range) / range.planned_s : null,
+                        locale,
+                      )}
+                      )
+                    </span>{' '}
+                    ({t('machineHours')})
                   </p>
                 </div>
               </section>

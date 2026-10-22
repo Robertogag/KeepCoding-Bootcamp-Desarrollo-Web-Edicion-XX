@@ -604,7 +604,8 @@
     "noMachinesText": "Marca al menos una máquina o vuelve a Todas.",
     "loadingDays": "Cargando {loaded} de {total} días…",
     "loadFailed": "No se pudieron cargar los datos del rango",
-    "retry": "Intentar de nuevo"
+    "retry": "Intentar de nuevo",
+    "downtime": "Tiempo muerto"
   },
   "members": {
     "title": "Personal de la planta",
@@ -841,7 +842,11 @@
         "d7": "7 días",
         "d30": "30 días"
       },
-      "count": "{count, plural, =1 {1 paro} other {# paros}} en el rango"
+      "count": "{count, plural, =1 {1 paro} other {# paros}} en el rango",
+      "classification": "Clasificación",
+      "allClassification": "Todos",
+      "pending": "Sin clasificar",
+      "done": "Clasificados"
     }
   },
   "context": {

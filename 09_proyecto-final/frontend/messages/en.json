@@ -604,7 +604,8 @@
     "noMachinesText": "Tick at least one machine or go back to All.",
     "loadingDays": "Loading {loaded} of {total} days…",
     "loadFailed": "The range data could not be loaded",
-    "retry": "Try again"
+    "retry": "Try again",
+    "downtime": "Downtime"
   },
   "members": {
     "title": "Plant staff",
@@ -841,7 +842,11 @@
         "d7": "7 days",
         "d30": "30 days"
       },
-      "count": "{count, plural, =1 {1 stop} other {# stops}} in the range"
+      "count": "{count, plural, =1 {1 stop} other {# stops}} in the range",
+      "classification": "Classification",
+      "allClassification": "All",
+      "pending": "Unclassified",
+      "done": "Classified"
     }
   },
   "context": {

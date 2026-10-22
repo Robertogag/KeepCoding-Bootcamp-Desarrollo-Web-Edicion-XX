@@ -19,6 +19,11 @@ export interface ReportTotals extends OeeTotals {
 // Totales con o sin los campos extra del reporte: sirve para filas por día (OeeRow) y por máquina.
 export type ReportLike = OeeTotals & Partial<Pick<ReportTotals, 'ideal_s' | 'capped'>>;
 
+// Tiempo muerto acumulado: lo planificado que no se trabajó (nunca negativo).
+export function downtimeSeconds(totals: Pick<OeeTotals, 'run_s' | 'planned_s'>): number {
+  return Math.max(0, totals.planned_s - totals.run_s);
+}
+
 function empty(): Accumulator {
   return { good: 0, reject: 0, run_s: 0, planned_s: 0, idealWeighted: 0, unknownIdeal: false };
 }

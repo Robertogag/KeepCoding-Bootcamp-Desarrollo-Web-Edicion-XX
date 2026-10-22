@@ -26,6 +26,7 @@ const RANGES = { d1: 24 * HOUR, d7: 7 * 24 * HOUR, d30: 30 * 24 * HOUR } as cons
 type RangeKey = keyof typeof RANGES;
 type StopState = 'DOWN' | 'IDLE';
 type StateFilter = StopState | 'both';
+type ClassifiedFilter = 'all' | 'pending' | 'done';
 
 interface StopRow {
   event: MachineEvent;
@@ -43,6 +44,7 @@ export function MachineDowntimesPanel() {
   const [range, setRange] = useState<RangeKey>('d1');
   const [stateFilter, setStateFilter] = useState<StateFilter>('both');
   const [machineId, setMachineId] = useState('');
+  const [classified, setClassified] = useState<ClassifiedFilter>('all');
   const [classifying, setClassifying] = useState<MachineEvent | null>(null);
   const [page, setPage] = useState(1);
 
@@ -77,6 +79,13 @@ export function MachineDowntimesPanel() {
   const rows: StopRow[] = queries
     .flatMap((query) => query.data?.items ?? [])
     .map((event) => ({ event, machineName: nameOf.get(event.machine_id) ?? '' }))
+    .filter(({ event }) =>
+      classified === 'all'
+        ? true
+        : classified === 'pending'
+          ? !event.classified_by
+          : !!event.classified_by,
+    )
     .sort((a, b) => b.event.started_at.localeCompare(a.event.started_at));
   const truncated = queries.some((query) => query.data?.has_next);
   const pageSize = 25;
@@ -144,6 +153,21 @@ export function MachineDowntimesPanel() {
               <option value="both">{t('both')}</option>
               <option value="DOWN">{t('down')}</option>
               <option value="IDLE">{t('idle')}</option>
+            </Select>
+          </label>
+          <label className="text-sm text-muted">
+            {t('classification')}
+            <Select
+              value={classified}
+              onChange={(event) => {
+                setClassified(event.target.value as ClassifiedFilter);
+                setPage(1);
+              }}
+              className="mt-1 w-auto"
+            >
+              <option value="all">{t('allClassification')}</option>
+              <option value="pending">{t('pending')}</option>
+              <option value="done">{t('done')}</option>
             </Select>
           </label>
           <label className="text-sm text-muted">
