@@ -27,6 +27,7 @@ from app.services.auth import (
     verify_password,
 )
 from app.services.mailer import send_password_reset
+from app.services.ratelimit import clear, client_ip, enforce
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 _dummy_hash = hash_password("DummyPassword1428")
@@ -57,7 +58,8 @@ async def check_unique(session, username=None, email=None, exclude_id=None):
 
 
 @router.post("/register", status_code=201)
-async def register(data: Register, response: Response, session: Session):
+async def register(data: Register, request: Request, response: Response, session: Session):
+    await enforce("register", [f"ip:{client_ip(request)}"], limit=10)
     await check_unique(session, data.username, data.email)
     user = User(**data.model_dump(exclude={"password"}), password_hash=hash_password(data.password))
     session.add(user)
@@ -75,7 +77,9 @@ async def register(data: Register, response: Response, session: Session):
 
 
 @router.post("/login")
-async def login(data: Login, response: Response, session: Session):
+async def login(data: Login, request: Request, response: Response, session: Session):
+    # Diez intentos por ventana, por dirección y por usuario; acertar limpia el del usuario.
+    await enforce("login", [f"ip:{client_ip(request)}", f"user:{data.username.lower()}"], limit=10)
     user = await session.scalar(
         select(User).where(User.username == data.username).with_for_update()
     )
@@ -84,6 +88,7 @@ async def login(data: Login, response: Response, session: Session):
         raise ApiError(401, "INVALID_CREDENTIALS")
     raw = await new_refresh(session, user.id)
     await session.commit()
+    await clear("login", f"user:{data.username.lower()}")
     set_refresh_cookie(response, raw)
     return {"user": user_data(user), "access_token": issue_access_token(user)}
 
@@ -122,7 +127,8 @@ async def _deliver_reset(user, token):
 
 
 @router.post("/password/forgot", status_code=204)
-async def forgot(data: Forgot, tasks: BackgroundTasks, session: Session):
+async def forgot(data: Forgot, request: Request, tasks: BackgroundTasks, session: Session):
+    await enforce("forgot", [f"ip:{client_ip(request)}"], limit=5)
     user = await session.scalar(select(User).where(User.email == data.email))
     if user:
         raw = secrets.token_urlsafe(48)

@@ -88,7 +88,8 @@
     "NETWORK_ERROR": "Sin conexión con el servidor.",
     "SERVER_ERROR": "El servidor respondió con un error.",
     "UNKNOWN": "Ocurrió un error inesperado.",
-    "RESOURCE_CONFLICT": "Ese registro choca con otro en uso: código repetido, corrida abierta o paro abierto."
+    "RESOURCE_CONFLICT": "Ese registro choca con otro en uso: código repetido, corrida abierta o paro abierto.",
+    "RATE_LIMITED": "Demasiados intentos. Espera unos minutos y vuelve a intentarlo."
   },
   "validation": {
     "required": "Este campo es obligatorio.",

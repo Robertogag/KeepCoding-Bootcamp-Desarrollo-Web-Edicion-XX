@@ -14,9 +14,7 @@ interface OeeGaugeProps {
   className?: string;
 }
 
-// Anillo de OEE: el arco llena en proporción y toma el color del semáforo.
-// El halo es un segundo arco translúcido, sin filtros: un filter sobre el SVG crea una capa
-// compuesta que pinta un rectángulo sobre el fondo fijo de la página.
+// Anillo de OEE liso: el arco llena en proporción y toma el color del semáforo, sin halo ni filtros.
 export function OeeGauge({ value, size = 84, stroke = 8, label, className }: OeeGaugeProps) {
   const locale = useLocale();
   const level = oeeLevel(value);
@@ -58,18 +56,7 @@ export function OeeGauge({ value, size = 84, stroke = 8, label, className }: Oee
           strokeOpacity={0.6}
           strokeWidth={stroke}
         />
-        {ratio > 0 ? (
-          <>
-            <circle
-              {...arc}
-              stroke={color}
-              strokeOpacity={0.16}
-              strokeWidth={stroke * 2.2}
-              strokeLinecap="butt"
-            />
-            <circle {...arc} stroke={color} strokeWidth={stroke} />
-          </>
-        ) : null}
+        {ratio > 0 ? <circle {...arc} stroke={color} strokeWidth={stroke} /> : null}
       </svg>
       <div className="absolute inset-0 flex flex-col items-center justify-center leading-none">
         <span

@@ -2,7 +2,6 @@
 
 import { useLocale, useTranslations } from 'next-intl';
 import {
-  Area,
   CartesianGrid,
   ComposedChart,
   Line,
@@ -75,7 +74,7 @@ interface SeriesChartProps {
   height?: number;
 }
 
-// Promedio por intervalo como línea y banda mínimo–máximo; los huecos no se unen.
+// Promedio por intervalo como línea limpia (mínimo y máximo van en el tooltip); los huecos no se unen.
 export function SeriesChart({ series, label, timeZone, from, to, height = 180 }: SeriesChartProps) {
   const t = useTranslations('telemetry');
   const locale = useLocale();
@@ -147,15 +146,6 @@ export function SeriesChart({ series, label, timeZone, from, to, height = 180 }:
               <Tooltip
                 content={<SeriesTooltip unit={unit} timeZone={timeZone} spanMs={spanMs} />}
                 cursor={{ stroke: 'var(--muted)', strokeWidth: 1 }}
-              />
-              <Area
-                type="monotone"
-                dataKey="band"
-                stroke="none"
-                fill="var(--series-1)"
-                fillOpacity={0.18}
-                connectNulls={false}
-                isAnimationActive={false}
               />
               <Line
                 type="monotone"

@@ -100,8 +100,8 @@ levanta completo en localhost con Docker en unos minutos (sección 7).
 
 ## 3. Recorrido con imágenes reales
 
-Capturas tomadas de la demo en línea el 22 de octubre de 2026, con la cuenta de consulta. Cada
-imagen corresponde a un módulo; debajo se explica qué se observa y de dónde sale el dato.
+Capturas tomadas de la demo en línea con la cuenta de consulta. Cada imagen corresponde a un
+módulo; debajo se explica qué se observa y de dónde sale el dato.
 
 ### Portada y acceso
 
@@ -217,30 +217,56 @@ inferior.
 
 ## 4. Arquitectura general
 
-```
-                 navegador (es / en, responsive)
-                            │ HTTPS
-                            ▼
-               Cloud Run · gateway Caddy (URL corta, redirecciones, cabeceras)
-                            │ HTTPS hacia el origen
-                            ▼
-   ┌──────────────────────── VM de Google Cloud (Debian + Docker Compose) ─────────────────────┐
-   │  Caddy ──► /api, /ws ──► API FastAPI ──► PostgreSQL 16                                     │
-   │        └─► resto   ──► Frontend Next.js (SSR)        ▲          ▲                           │
-   │                                                      │          │                           │
-   │  Colector ──── Modbus TCP ───► Simulador (8 máquinas) │   Redis (snapshots, pub/sub)        │
-   │     └── minutos, eventos, telemetría, alertas ───────┘          │                           │
-   │  Mailpit (correo interno de la demo)  ◄── notificaciones ───────┘                           │
-   └────────────────────────────────────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart LR
+  B["Navegador<br/>es / en · escritorio y móvil"]
+  subgraph GC["Google Cloud"]
+    CR["Cloud Run<br/>gateway Caddy · HTTPS"]
+    subgraph VM["VM Compute Engine · Docker Compose"]
+      C["Caddy<br/>TLS y proxy"]
+      FE["Frontend<br/>Next.js 16 · SSR"]
+      API["API<br/>FastAPI · REST + WebSocket"]
+      COL["Colector<br/>Python · lectura Modbus cada segundo"]
+      SIM["Simulador<br/>8 inyectoras · Modbus TCP"]
+      PG[("PostgreSQL 16")]
+      RD[("Redis 7")]
+      MP["Mailpit<br/>correo interno de la demo"]
+    end
+  end
+  B -->|HTTPS| CR -->|HTTPS| C
+  C -->|"/api · /ws"| API
+  C -->|páginas| FE
+  FE -->|SSR| API
+  API --> PG
+  API <--> RD
+  API -->|correo de alertas| MP
+  COL -->|Modbus TCP| SIM
+  COL -->|minutos · eventos · telemetría| PG
+  COL -->|snapshots · pub/sub| RD
 ```
 
-Tres procesos del backend comparten modelos y servicios: la **API** (REST + WebSocket), el
-**colector** (lee Modbus cada segundo, persiste y evalúa alertas) y el **simulador** (hace de las
-máquinas). El frontend es un servidor Next.js que renderiza la zona pública en servidor y consume
+Tres procesos de Python comparten modelos y servicios: la **API** (REST + WebSocket), el
+**colector** y el **simulador**. El colector es un único proceso (`python -m app.collector`,
+cuatro módulos dentro del paquete del backend) que cada segundo lee las ocho máquinas en paralelo
+con pymodbus, convierte disparos en piezas según las cavidades activas, escribe minutos, eventos y
+telemetría por lotes en PostgreSQL, publica el snapshot de cada máquina en Redis y evalúa las
+reglas de alerta. El simulador es otro proceso con un servidor Modbus TCP y una máquina de estados
+por inyectora, reproducible por semilla; en una planta real se sustituye por los equipos. El frontend es un servidor Next.js que renderiza la zona pública en servidor y consume
 la API desde el navegador con un WebSocket por sesión. Todo corre en contenedores definidos en
 Compose, con una capa extra de archivos para la demo y para la entrada por Cloud Run.
 
 ---
+
+### Tecnologías utilizadas
+
+| Capa | Lenguaje | Frameworks y librerías | Herramientas |
+|---|---|---|---|
+| Frontend | TypeScript (modo estricto) | Next.js 16 (App Router, SSR), React 19, next-intl, TanStack Query, React Hook Form + zod, Tailwind CSS 4, Recharts, exceljs, MSW (mocks) | pnpm, ESLint, Prettier, Vitest, Playwright |
+| Backend (API y colector) | Python 3.12 | FastAPI, SQLAlchemy 2 (asyncio) + asyncpg, Alembic, Pydantic, PyJWT, argon2, pymodbus, Pillow, redis | uv, Ruff, pytest, pytest-asyncio |
+| Simulador | Python 3.12 | pymodbus (servidor Modbus TCP), FastAPI (control HTTP) | pytest |
+| Datos | SQL | PostgreSQL 16, Redis 7 | pg_dump / pg_restore |
+| Infraestructura | Bash, PowerShell, YAML | Docker, Docker Compose, Caddy 2, Google Cloud (Compute Engine, Cloud Run, Artifact Registry, IAP) | gcloud, scripts de aprovisionamiento, empaquetado y respaldo |
+| Contrato y documentación | Markdown, OpenAPI | Especificación escrita y documentación OpenAPI generada por el API | Git y GitHub |
 
 ## 5. Arquitectura por partes
 
@@ -250,7 +276,7 @@ Compose, con una capa extra de archivos para la demo y para la entrada por Cloud
 |---|---|
 | VM `e2-medium` en GCP (Debian, Docker Engine, Compose) | Aloja todos los contenedores; IP fija; acceso por SSH mediante IAP, sin puertos abiertos salvo Caddy. |
 | Caddy en la VM | TLS automático para el origen, proxy a API y frontend, filtra tokens y cookies de los registros. |
-| Cloud Run `oee-live` | Entrada HTTPS con URL corta `oee-live-keepcoding.cloud.run`; redirige las direcciones anteriores con 308 y fija cabeceras canónicas. |
+| Cloud Run `oee-live` | Entrada HTTPS pública de la demo; redirige las direcciones anteriores con 308 y fija las cabeceras de seguridad. |
 | Releases inmutables | Un archivo `oee-release.tar.gz` con manifiesto SHA-256 por versión; en la VM cada release vive en `/opt/oee-live/releases/<fecha>`; se despliega con Compose y se conserva la anterior para revertir. |
 | Respaldos | `pg_dump` verificado antes de cada despliegue, en `/opt/oee-live/backups`. |
 | Secretos | Un único `.env.demo` con permisos de root 0600; nunca en el repositorio ni en los registros. |
@@ -281,9 +307,11 @@ Todo se guarda en UTC; los cortes por día y por turno se calculan en la zona de
   inyección, órdenes y corridas con trazabilidad, paros de línea, variables y telemetría,
   tablero y plano, alertas, notificaciones y seguimiento.
 - **WebSocket** privado por sesión (snapshots y notificaciones) y público por planta.
-- **Colector**: lee cada máquina por Modbus TCP cada segundo, convierte disparos en piezas según
-  las cavidades activas, persiste minutos y eventos, mantiene snapshots en Redis y evalúa las
-  reglas de alerta.
+- **Colector**: un solo proceso de Python (`app/collector`: `runner.py`, `state.py`,
+  `storage.py`, `health.py`) que lee las ocho máquinas por Modbus TCP cada segundo y en
+  paralelo, convierte disparos en piezas según las cavidades activas, persiste minutos, eventos y
+  telemetría por lotes, mantiene snapshots en Redis y evalúa las reglas de alerta. En una planta
+  real se añaden máquinas por configuración, sin un script por máquina.
 - **Cálculo de OEE** con reglas explícitas: excluye tiempo fuera de turno, une turnos solapados,
   limita el rendimiento a 100 %, devuelve `null` ante divisor cero y agrega la planta con
   acumulados, nunca promediando porcentajes.
@@ -319,26 +347,27 @@ Detalle en [frontend/README.md](frontend/README.md).
 
 ---
 
-## 6. Cómo cubre los requisitos del bootcamp
+## 6. Seguridad
 
-| Requisito | En OEE Live |
+Lo que un revisor puede comprobar desde fuera, verificado contra la demo en línea:
+
+| Aspecto | Cómo está resuelto |
 |---|---|
-| Multi-idioma | es / en en toda la interfaz; correos en el idioma del usuario; el API devuelve códigos, no textos |
-| Zona pública con SEO y responsive | Portada, tablero público, detalle de máquina con URL amigable, SSR, metadatos, sitemap, hreflang |
-| Zona privada con login | Plantas, máquinas, turnos, personal, alertas, producción, paros, datos |
-| API REST | FastAPI `/api/v1` con OpenAPI |
-| Registro, login, logout, recuperar contraseña, editar datos, baja | Completo; la baja borra la información del usuario y sus plantas si era el único propietario |
-| Usuario o email únicos | Validación en backend y comprobación en el formulario |
-| CRUD con imagen y versiones responsive | Máquinas con foto en 320 / 768 / 1280 px (WebP) |
-| Listados con límite, orden y paginación | Máquinas, eventos, notificaciones, seguimiento, plantas públicas |
-| Buscador con filtros | Máquinas por nombre, estado y marca; eventos y paros por rango, estado y máquina |
-| Favoritos | Lista de seguimiento de máquinas |
-| Notificaciones en tiempo real o por email | Máquina caída, sin conexión u OEE bajo el umbral: toast y campana por WebSocket, correo si no está conectado |
-| Compartir en redes | X, Facebook, LinkedIn y WhatsApp desde el detalle público |
-| Roles | Anónimo, propietario, supervisor, operador (por planta) |
-| Estados de interfaz | Cargando, ideal, error con reintento, vacío y en progreso en cada componente de datos |
-| Desplegado en internet | Google Cloud: VM con Docker Compose y Caddy, entrada HTTPS por Cloud Run |
-| Valor extra | Simulador Modbus, colector en tiempo real, clasificación de paros, corridas de inyección, Excel con formato |
+| Contraseñas | Hash Argon2; nunca se guardan ni se registran en claro. La comprobación usa un hash ficticio cuando el usuario no existe, para no revelar si existe. |
+| Sesión | Access token JWT (HS256) de 15 minutos solo en memoria del navegador; refresh en cookie `HttpOnly`, `Secure`, `SameSite=Lax`, con ruta limitada a `/api/v1/auth` y rotación con familia revocable (reutilizar un refresh viejo invalida la cadena). Un token alterado responde 401. |
+| Autorización | Toda ruta privada responde 401 sin sesión. Los permisos se verifican por planta: un recurso ajeno responde 404 (no se enumera) y un rol insuficiente 403. La cuenta de demo es operador: puede leer, no escribir. |
+| Intentos de acceso | Límite de diez intentos por ventana de diez minutos por dirección y por usuario en el login (429), diez registros por dirección y cinco solicitudes de recuperación de contraseña por dirección; los contadores viven en Redis. |
+| CORS y cabeceras | CORS solo para el origen del frontend; un origen ajeno recibe 400 en el preflight. HSTS, `X-Frame-Options: SAMEORIGIN`, `X-Content-Type-Options: nosniff`, `Referrer-Policy: no-referrer`, `Permissions-Policy` sin cámara, micrófono ni ubicación, y sin cabecera `x-powered-by`. |
+| Entradas | Validación con esquemas (Pydantic en el API, zod en el frontend). React escapa el HTML. El CSV protege las celdas que empiezan con `=`, `+`, `-` o `@` contra inyección de fórmulas. Las fotos se decodifican y se vuelven a codificar en WebP en tres tamaños: no se sirve el archivo original. |
+| Registro y correo | Los enlaces de recuperación y de dejar de seguir llevan tokens firmados de un solo uso con caducidad; los tokens se guardan hasheados. El correo de la demo queda en un buzón interno. |
+| Servidor | Solo Caddy publica puertos en la VM; PostgreSQL, Redis, Mailpit y el simulador son internos. Acceso administrativo por SSH mediante IAP, sin puertos abiertos. Secretos en un único archivo con permisos de root; nunca en el repositorio ni en los registros. El gateway excluye los registros automáticos de petición porque la URL del WebSocket lleva el token, y Caddy redacta tokens y cookies en los suyos. |
+| Dependencias | `pnpm audit` sin avisos en producción tras fijar `uuid` a una versión corregida; backend con versiones bloqueadas en `uv.lock`. |
+
+Límites conocidos, para decirlos antes de que los encuentren: no hay Content-Security-Policy
+(Next y las gráficas usan estilos y scripts en línea; se dejó fuera para no romper la interfaz en la
+entrega); la documentación OpenAPI es pública en `/api/v1/docs` a propósito, para la evaluación;
+el token del WebSocket viaja en la URL, como fija la especificación, mitigado con la exclusión y
+redacción de registros; y la cuenta `demo` es pública por diseño, con permisos de solo lectura.
 
 ---
 
@@ -398,13 +427,13 @@ configuración, variables y decisiones está en [docs/README-tecnico.md](docs/RE
 
 ## 8. Qué reforcé con este bootcamp
 
-Trabajo en la creación de sistemas para la industria automotriz: un MES y un ERP de planta que
-capturan datos de máquinas de inyección y ensamble en tiempo real, trazabilidad por etiqueta y
-tableros de producción. Llegué al bootcamp con ese contexto y con formación previa en datos e
-inteligencia artificial. Lo que me dejó, aplicado en este proyecto:
+Trabajo en la industria automotriz, donde desarrollé el MES de mi planta: captura de datos de
+máquinas de inyección y ensamble, trazabilidad y tableros de producción. Hace dos años cursé el
+bootcamp de Big Data en KeepCoding, y este lo elegí para reforzar desarrollo web: frontend, backend
+y despliegue. Lo que me dejó, aplicado en este proyecto:
 
 - **TDD y pruebas como parte del diseño.** Las reglas del OEE, el agregado de reportes, el
-  parseo del CSV, el libro de Excel y el cliente de API nacieron con su prueba. 227 pruebas en el
+  parseo del CSV, el libro de Excel y el cliente de API nacieron con su prueba. 230 pruebas en el
   backend y 68 en el frontend, más un recorrido de extremo a extremo que ejecuto antes de cada
   entrega.
 - **Arquitectura hexagonal, en la práctica.** Dominio y servicios separados de rutas y modelos en el
@@ -415,16 +444,12 @@ inteligencia artificial. Lo que me dejó, aplicado en este proyecto:
   pedir, formularios con React Hook Form y zod, internacionalización, accesibilidad y estados de
   interfaz explícitos.
 - **Backend.** API REST con contrato OpenAPI, autenticación con JWT y refresh rotatorio, roles por
-  recurso, WebSocket, procesos en segundo plano (colector) y cálculo con reglas de negocio
-  verificables.
+  recurso, WebSocket, un proceso de captura en segundo plano (el colector) y cálculo con reglas de
+  negocio verificables.
 - **Servidores y despliegue.** Contenedores con Docker Compose, proxy con TLS, releases
   inmutables con manifiesto, respaldos, una VM en Google Cloud y Cloud Run como entrada HTTPS;
   y la costumbre de verificar en producción con un recorrido automatizado antes de dar algo por
   entregado.
-- **Trabajar sobre un contrato.** El frontend y el backend se construyeron en paralelo contra una
-  especificación escrita (`docs/especificacion.md`), con mensajes de integración numerados y
-  decisiones registradas. Eso es exactamente lo que necesito en la industria, donde el PLC, el
-  colector, la base y la pantalla los hacen equipos distintos.
 
 ---
 
@@ -444,6 +469,6 @@ inteligencia artificial. Lo que me dejó, aplicado en este proyecto:
 
 ## 10. Estado
 
-Entregado el 22 de octubre de 2026 y desplegado en https://oee-live-keepcoding.cloud.run, con
-los datos de la planta de demostración generándose en vivo. La demo permanece una semana; el
+Desplegado en https://oee-live-keepcoding.cloud.run, con los datos de la planta de demostración
+generándose en vivo. La demo permanece una semana; el
 código de esta carpeta levanta el sistema completo en cualquier equipo con Docker.
