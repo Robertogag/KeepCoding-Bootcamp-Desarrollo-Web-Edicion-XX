@@ -437,19 +437,30 @@ La referencia completa de variables y decisiones está en [docs/README-tecnico.m
 ## 8. Qué me dejó el bootcamp
 
 Hace dos años hice el bootcamp de Big Data en KeepCoding. Este lo tomé para reforzar desarrollo
-web, porque en mi trabajo el MES lo levanté más por necesidad que por formación. Lo que cambió:
+web, porque en mi trabajo el MES lo levanté más por necesidad que por formación.
 
-- Pruebas desde el diseño. Las reglas del OEE, el CSV y el Excel nacieron con su prueba. Antes
-  probaba a mano en la planta.
-- Separar el dominio de la infraestructura. En el backend las reglas de negocio no saben de rutas
-  ni de tablas; en el frontend los componentes no saben de HTTP. Eso me permitió desarrollar la
-  pantalla con mocks mientras el API no existía.
-- React en serio: renderizado en servidor, caché con TanStack Query, snapshots de WebSocket
-  escritos en la caché sin volver a pedir, formularios con validación, i18n y accesibilidad.
-- Backend con contrato: OpenAPI, JWT con refresh rotatorio, roles por recurso, un proceso de
-  captura aparte.
-- Desplegar de verdad: contenedores, proxy con TLS, versiones inmutables con respaldo y una
-  verificación automatizada contra producción antes de dar algo por entregado.
+**Lo que reforcé del bootcamp**
+
+- Pruebas desde el diseño (módulo de TDD). Antes probaba a mano en la planta; ahora las reglas del
+  OEE, el CSV y el Excel nacieron con su prueba.
+- Arquitectura en capas (módulo de backend): las reglas de negocio no saben de rutas ni de tablas.
+- React: componentes, estado, hooks, rutas y formularios con validación (React fundamentos y
+  avanzado).
+- Backend con autenticación JWT y roles (backend avanzado).
+- Configurar un servidor y desplegar (módulo de despliegue).
+
+**Hasta dónde lo llevé en este proyecto**
+
+- Las pruebas también en Python con pytest, y un recorrido automatizado que corro contra
+  producción antes de entregar.
+- La separación estricta de dominio e infraestructura, con mocks que implementan el mismo
+  contrato del API; eso me dejó construir la pantalla cuando el API todavía no existía. Es la
+  forma de trabajar que uso en el MES.
+- Next.js con renderizado en servidor, caché con TanStack Query, snapshots de WebSocket escritos
+  en la caché sin volver a pedir, i18n y accesibilidad.
+- El backend en Python con FastAPI y contrato OpenAPI, refresh rotatorio, y un proceso aparte que
+  lee las máquinas por Modbus.
+- Docker Compose, proxy con TLS, versiones inmutables con respaldo y Cloud Run como entrada.
 
 Lo que haría distinto con más tiempo: el histórico de telemetría sigue lento (las series de 8 horas
 tardan varios segundos en una VM de 2 vCPU) y el CSV del servidor recalcula todo; lo resolví
