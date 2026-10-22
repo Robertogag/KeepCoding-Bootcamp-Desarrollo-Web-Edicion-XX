@@ -157,8 +157,8 @@ las direcciones confirmadas de equipos físicos. El colector solo lee.
 El seed agrega ocho configuraciones de inyección de 1, 2 y 4 cavidades y sus
 catálogos demo de forma idempotente. Reutiliza las máquinas del demo anterior por
 identidad y mantiene sus datos históricos; no inventa telemetría pasada. Las
-rutas, formularios y reglas para integrar las pantallas están en
-`docs/coordination/backend.md` (B-016), y los DTOs en `/api/v1/docs`.
+rutas y los DTOs están documentados en `/api/v1/docs`, y el contrato completo en
+`docs/especificacion.md`.
 
 ## Tablero de planta e históricos
 

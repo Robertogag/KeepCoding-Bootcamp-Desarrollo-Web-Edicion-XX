@@ -423,8 +423,8 @@ de solicitudes y cero coincidencias con los patrones de JWT o token comprobados.
 La suite del backend previa terminó con 227 pruebas correctas y 33 pruebas
 opcionales de PostgreSQL omitidas porque `localhost:55432` no estaba disponible.
 La verificación HTTP/API no ejecuta JavaScript ni sustituye una revisión visual.
-El recorrido visual del frontend confirmó 10 de 10 comprobaciones, más registro y baja de cuenta,
-en el hostname anterior (F-038). F-040 confirma el recorrido visual en `run.app`:
+El recorrido visual automatizado (Playwright) confirmó 10 de 10 comprobaciones, más registro y
+baja de cuenta, primero en el hostname anterior y después en `run.app`:
 10 pantallas aprobadas, registro y baja de cuenta de prueba, redirección y enlaces
 de idioma correctos, sin cambios adicionales en frontend.
 
@@ -475,8 +475,8 @@ migraciones:
 | `20261022T101851860164Z` | Seguridad y acabado: límite de intentos en login (10 por IP y 50 por usuario en ventanas de 10 min desde la release siguiente; 10 y 10 en esta), registro (10 por IP) y recuperación (5 por IP) con contadores en Redis, 429 `RATE_LIMITED`; sin cabecera `x-powered-by`; `uuid` fijado a versión corregida; anillo de OEE liso y gráficas de telemetría sin banda. Backend y frontend. | (ver `docker images`) |
 | `20261022T103709873326Z` | Login: 10 intentos por dirección y 50 por usuario en ventanas de 10 min (la cuenta compartida de demo no se bloquea por errores ajenos). Backend solo. | (ver `docker images`) |
 
-Procedimiento usado, con el script `/tmp/oee-datos-vm.sh` (copia de `scratchpad/oee-datos-vm.sh`
-del equipo de frontend; toma el mismo candado que `deploy-demo.sh`):
+Procedimiento usado, con el script `scripts/gcp/update-release.sh`, copiado a la VM como
+`/tmp/oee-datos-vm.sh` (toma el mismo candado que `deploy-demo.sh`):
 
 ```sh
 # local: empaquetar y subir
