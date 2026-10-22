@@ -78,8 +78,10 @@ async def register(data: Register, request: Request, response: Response, session
 
 @router.post("/login")
 async def login(data: Login, request: Request, response: Response, session: Session):
-    # Diez intentos por ventana, por dirección y por usuario; acertar limpia el del usuario.
-    await enforce("login", [f"ip:{client_ip(request)}", f"user:{data.username.lower()}"], limit=10)
+    # Diez intentos por dirección frenan la fuerza bruta; cincuenta por usuario evitan que una
+    # cuenta compartida quede bloqueada por errores ajenos. Acertar limpia el contador del usuario.
+    await enforce("login", [f"ip:{client_ip(request)}"], limit=10)
+    await enforce("login", [f"user:{data.username.lower()}"], limit=50)
     user = await session.scalar(
         select(User).where(User.username == data.username).with_for_update()
     )

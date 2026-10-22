@@ -472,7 +472,7 @@ migraciones:
 | `20261022T091717495982Z` | Histórico: la consulta de series espera a la lista de variables, así no se lanza dos veces. Frontend solo. | (ver `docker images`) |
 | `20261022T093832307261Z` | Portada con un solo panel de acceso y la cuenta de demo al pie, guía como texto; plano con fichas de instrumento por máquina (barra de estado, silueta pequeña, nombre, OEE grande, A/P/Q, corrida) en rejilla a todo el ancho y franja de la escuela al pie. Frontend solo. | (ver `docker images`) |
 | `20261022T094745619864Z` | Portada: el acceso de demo se lee de `DEMO_USERNAME` y `DEMO_PASSWORD` del contenedor en cada petición (los nombres `NEXT_PUBLIC_*` se incrustan al compilar y no sirven en tiempo de ejecución). `.env.demo` ya define ambas. Frontend solo. | (ver `docker images`) |
-| `20261022T101851860164Z` | Seguridad y acabado: límite de intentos en login (10 por ventana de 10 min por IP y usuario), registro (10 por IP) y recuperación (5 por IP) con contadores en Redis, 429 `RATE_LIMITED`; sin cabecera `x-powered-by`; `uuid` fijado a versión corregida; anillo de OEE liso y gráficas de telemetría sin banda. Backend y frontend. | (ver `docker images`) |
+| `20261022T101851860164Z` | Seguridad y acabado: límite de intentos en login (10 por IP y 50 por usuario en ventanas de 10 min desde la release siguiente; 10 y 10 en esta), registro (10 por IP) y recuperación (5 por IP) con contadores en Redis, 429 `RATE_LIMITED`; sin cabecera `x-powered-by`; `uuid` fijado a versión corregida; anillo de OEE liso y gráficas de telemetría sin banda. Backend y frontend. | (ver `docker images`) |
 
 Procedimiento usado, con el script `/tmp/oee-datos-vm.sh` (copia de `scratchpad/oee-datos-vm.sh`
 del equipo de frontend; toma el mismo candado que `deploy-demo.sh`):
