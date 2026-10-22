@@ -10,14 +10,6 @@
 **Demo en línea:** https://oee-live-keepcoding.cloud.run
 **Tablero público sin cuenta:** https://oee-live-keepcoding.cloud.run/es/plants/planta-demo-slp
 
-> **Summary (EN).** OEE Live is a SaaS for small and mid-size plants that have no MES: it reads
-> injection machines over Modbus TCP, shows their state in real time and computes Availability,
-> Performance, Quality and OEE per machine, shift and plant, with alerts, downtime classification,
-> production runs and formatted Excel reports. Next.js 16 frontend, FastAPI backend, PostgreSQL,
-> Redis, a Modbus simulator and a collector, deployed on Google Cloud (VM + Cloud Run gateway).
-> The online demo stays available for one week after delivery; afterwards, see *Ejecutarlo en
-> localhost* below.
-
 ---
 
 ## 1. Objetivo de la aplicación
